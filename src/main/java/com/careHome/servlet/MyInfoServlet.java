@@ -36,6 +36,8 @@ public class MyInfoServlet extends SuperServlet {
             myInfoService.myFamilyInfo(req, resp);
         } else if ("myfamilyname".equals(action)) {
             myInfoService.myFamilyName(req, resp);
+        } else if ("updatepassword".equals(action)) {
+            myInfoService.updatePassword(req, resp);
         }
     }
 

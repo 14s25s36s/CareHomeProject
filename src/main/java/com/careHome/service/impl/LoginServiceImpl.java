@@ -8,6 +8,7 @@ import com.careHome.pojo.LiveInfo;
 import com.careHome.pojo.UserInfo;
 import com.careHome.service.LoginService;
 import com.careHome.utils.LayListData;
+import com.careHome.utils.MD5Utils;
 import com.careHome.utils.Sys;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,13 +32,14 @@ public class LoginServiceImpl implements LoginService {
         String userAccount = req.getParameter("useraccount");
         String password = req.getParameter("password");
         Account account = loginDao.selectOnAccountInfo(userAccount).get(0);
-        if (userAccount.equals(account.getUseraccount()) && password.equals(account.getPassword()) && 0 == account.getPermissions()) {
+        String decryptPwd=MD5Utils.decrypt(account.getPassword(),password);
+        if (userAccount.equals(account.getUseraccount()) && decryptPwd.equals(account.getPassword()) && 0 == account.getPermissions()) {
             req.getSession().setAttribute(Sys.LOGIN_USER, account);
             resp.getWriter().write("超级管理员登陆成功");
-        } else if (userAccount.equals(account.getUseraccount()) && password.equals(account.getPassword()) && 1 == account.getPermissions()) {
+        } else if (userAccount.equals(account.getUseraccount()) && decryptPwd.equals(account.getPassword()) && 1 == account.getPermissions()) {
             req.getSession().setAttribute(Sys.LOGIN_USER, account);
             resp.getWriter().write("员工登陆成功");
-        } else if (userAccount.equals(account.getUseraccount()) && password.equals(account.getPassword()) && 2 == account.getPermissions()) {
+        } else if (userAccount.equals(account.getUseraccount()) && decryptPwd.equals(account.getPassword()) && 2 == account.getPermissions()) {
             req.getSession().setAttribute(Sys.LOGIN_USER, account);
             resp.getWriter().write("登陆成功");
         } else {
@@ -76,7 +78,8 @@ public class LoginServiceImpl implements LoginService {
     public void register(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String useraccount = req.getParameter("registeruseraccount");
         String password = req.getParameter("registerpass");
-        int result = loginDao.addUserAccount(useraccount, password);
+        String encryptPwd=MD5Utils.encrypt(password);
+        int result = loginDao.addUserAccount(useraccount, encryptPwd);
         Account account = loginDao.selectOnAccountInfo(useraccount).get(0);
         int aid = account.getAid();
         int resultOther = loginDao.addAidtoUserInfo(aid);

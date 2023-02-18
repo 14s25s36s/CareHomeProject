@@ -8,6 +8,7 @@ import com.careHome.pojo.LiveInfo;
 import com.careHome.pojo.UserInfo;
 import com.careHome.service.MyInfoService;
 import com.careHome.utils.LayListData;
+import com.careHome.utils.MD5Utils;
 import com.careHome.utils.Sys;
 
 import javax.servlet.http.HttpServletRequest;
@@ -96,7 +97,6 @@ public class MyInfoServiceImpl implements MyInfoService {
         String str_page = req.getParameter("page");
         String str_limit = req.getParameter("limit");
         String lname = req.getParameter("lname");
-        System.out.println("lname:" + lname);
         int page = Integer.parseInt(str_page);
         int limit = Integer.parseInt(str_limit);
         int start = (page - 1) * limit;
@@ -130,5 +130,30 @@ public class MyInfoServiceImpl implements MyInfoService {
         List<LiveInfo> liveInfoList = loginDao.selectOneMyFamilyInfo(uid);
         String json = JSON.toJSONString(liveInfoList);
         resp.getWriter().write(json);
+    }
+
+    @Override
+    public void updatePassword(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        Account account = (Account) req.getSession().getAttribute(Sys.LOGIN_USER);
+        Integer aid = account.getAid();
+        String oldpassword = req.getParameter("oldpassword");
+        String decryptPwd = MD5Utils.decrypt(account.getPassword(), oldpassword);
+        String newpassword = req.getParameter("password");
+        String newEncryptPwd = MD5Utils.decrypt(account.getPassword(), newpassword);
+        String encryptPwd = MD5Utils.encrypt(newpassword);
+        String msg = null;
+        if (account.getPassword().equals(decryptPwd) && !decryptPwd.equals(newEncryptPwd)) {
+            int result = loginDao.updatePassword(aid, encryptPwd);
+            if (result > 0) {
+                msg = "修改成功";
+                resp.getWriter().write(msg);
+            } else {
+                msg = "修改失败";
+                resp.getWriter().write(msg);
+            }
+        } else if (!account.getPassword().equals(decryptPwd)) {
+            msg = "原密码错误";
+            resp.getWriter().write(msg);
+        }
     }
 }

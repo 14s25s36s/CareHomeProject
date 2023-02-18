@@ -16,4 +16,5 @@ public interface MyInfoService {
 
     public void myFamilyName(HttpServletRequest req, HttpServletResponse resp) throws IOException;
 
+    public void updatePassword(HttpServletRequest req, HttpServletResponse resp) throws IOException;
 }

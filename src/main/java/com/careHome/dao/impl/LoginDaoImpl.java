@@ -190,5 +190,12 @@ public class LoginDaoImpl implements LoginDao {
         return liveInfoList;
     }
 
+    @Override
+    public int updatePassword(Integer aid, String password) {
+        String sql = "UPDATE account SET password=? WHERE aid=?";
+        int result = JDBCUtils.updateData(sql, password, aid);
+        return result;
+    }
+
 
 }

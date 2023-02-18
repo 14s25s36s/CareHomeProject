@@ -49,4 +49,6 @@ public interface LoginDao {
     public int selectCountFamily(String lname, Integer uid);
 
     public List<LiveInfo> selectOneMyFamilyInfo(Integer uid);
+
+    public int updatePassword(Integer aid, String password);
 }
