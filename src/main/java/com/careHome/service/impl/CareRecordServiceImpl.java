@@ -10,6 +10,7 @@ import com.careHome.pojo.CareRecode;
 import com.careHome.pojo.LiveInfo;
 import com.careHome.service.CareRecordService;
 import com.careHome.utils.LayListData;
+import com.careHome.utils.Sys;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,7 +30,7 @@ public class CareRecordServiceImpl implements CareRecordService {
      */
     @Override
     public void careInfo(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        Account account = (Account) req.getSession().getAttribute("account");
+        Account account = (Account) req.getSession().getAttribute(Sys.LOGIN_USER);
         Integer aid = account.getAid();
         Integer uid = loginDao.selectMyUserInfo(aid).get(0).getUid();
         String str_page = req.getParameter("page");
@@ -100,7 +101,7 @@ public class CareRecordServiceImpl implements CareRecordService {
         String lname = req.getParameter("lname");
         Integer lid = careRecordDao.selectOneLiveLidByLname(lname).get(0).getLid();
         String uname = req.getParameter("uname");
-        Integer uid = careRecordDao.selectOneUserUidByUnama(uname).get(0).getUid();
+        Integer uid = careRecordDao.selectOneUserUidByUname(uname).get(0).getUid();
         String careinfo = req.getParameter("careinfo");
         int result = careRecordDao.updateCareRecord(careid, lid, uid, careinfo);
         String msg = null;
@@ -125,7 +126,7 @@ public class CareRecordServiceImpl implements CareRecordService {
         String lname = req.getParameter("lname");
         Integer lid = careRecordDao.selectOneLiveLidByLname(lname).get(0).getLid();
         String uname = req.getParameter("uname");
-        Integer uid = careRecordDao.selectOneUserUidByUnama(uname).get(0).getUid();
+        Integer uid = careRecordDao.selectOneUserUidByUname(uname).get(0).getUid();
         String careinfo = req.getParameter("careinfo");
         int result = careRecordDao.addCareRecord(lid, uid, careinfo);
         resp.getWriter().write(result);

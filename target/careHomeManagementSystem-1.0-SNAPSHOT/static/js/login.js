@@ -198,7 +198,6 @@ $(function () {
 /* 验证码的js */
 var div = document.querySelector('#captcha');
 var characters = "QWETYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890";
-var str;
 
 function getRandom(l, r) {
     return parseInt(l + Math.random() * (r - l + 1));

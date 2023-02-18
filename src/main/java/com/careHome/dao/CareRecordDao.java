@@ -21,7 +21,7 @@ public interface CareRecordDao {
 
     public List<LiveInfo> selectOneLiveLidByLname(String lname);
 
-    public List<UserInfo> selectOneUserUidByUnama(String uname);
+    public List<UserInfo> selectOneUserUidByUname(String uname);
 
     public int updateCareRecord(String careid, Integer lid, Integer uid, String careinfo);
 

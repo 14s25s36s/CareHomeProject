@@ -125,7 +125,7 @@ public class CareRecordDaoImpl implements CareRecordDao {
      * @return
      */
     @Override
-    public List<UserInfo> selectOneUserUidByUnama(String uname) {
+    public List<UserInfo> selectOneUserUidByUname(String uname) {
         String sql = "SELECT uid,uname,usex,uage,uaddress,ustate,aid,permissions,deleted" +
                 " FROM userinfo WHERE uname=? AND deleted=0";
         List<UserInfo> userInfoList = JDBCUtils.selectData(sql, UserInfo.class, uname);

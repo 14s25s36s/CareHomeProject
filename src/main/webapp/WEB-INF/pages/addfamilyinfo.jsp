@@ -23,7 +23,7 @@
           tppabs="static/lib/layui/css/layui.css" media="all">
 </head>
 <body>
-<form class="layui-form layui-form-pane" action="login/addfamilyinfo">
+<form class="layui-form layui-form-pane" action="myinfo/addfamilyinfo">
     <div class="layui-form-item">
         <label class="layui-form-label">姓名</label>
         <div class="layui-input-inline">
