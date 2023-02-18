@@ -17,7 +17,6 @@ public class LoginFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
-        System.out.println("我进来了");
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html/charset=UTF-8");
         HttpSession session = req.getSession();
@@ -26,12 +25,10 @@ public class LoginFilter implements Filter {
         String msg = null;
         if (loginUser != null) {
             chain.doFilter(req, resp);
-            System.out.println("我出去了");
         } else {
             msg = "您还未登陆";
             req.getSession().setAttribute("msg", msg);
             resp.sendRedirect(req.getContextPath() + "/tologin.jsp");
-            System.out.println("我出去了null");
         }
     }
 
