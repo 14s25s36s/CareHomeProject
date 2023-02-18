@@ -15,6 +15,13 @@ import java.util.List;
 public class UserInfoServiceImpl implements UserInfoService {
     UserInfoDao userInfoDao = new UserInfoDaoImpl();
 
+    /**
+     * 查询所有的用户信息
+     *
+     * @param req
+     * @param resp
+     * @throws IOException
+     */
     @Override
     public void userInfo(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String str_page = req.getParameter("page");
@@ -37,6 +44,13 @@ public class UserInfoServiceImpl implements UserInfoService {
         resp.getWriter().write(json);
     }
 
+    /**
+     * 删除用户信息
+     *
+     * @param req
+     * @param resp
+     * @throws IOException
+     */
     @Override
     public void deleteuserinfo(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String uid = req.getParameter("uid");
@@ -52,6 +66,12 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     }
 
+    /**
+     * 前往修改用户信息
+     *
+     * @param req
+     * @param resp
+     */
     @Override
     public void toUpdateUserInfo(HttpServletRequest req, HttpServletResponse resp) {
         String uid = req.getParameter("uid");
@@ -59,6 +79,12 @@ public class UserInfoServiceImpl implements UserInfoService {
         req.setAttribute("userInfo", userInfo);
     }
 
+    /**
+     * 修改用户信息
+     *
+     * @param req
+     * @param resp
+     */
     @Override
     public void updateUserInfo(HttpServletRequest req, HttpServletResponse resp) {
         String uid = req.getParameter("uid");
@@ -78,6 +104,13 @@ public class UserInfoServiceImpl implements UserInfoService {
         }
     }
 
+    /**
+     * 添加用户信息
+     *
+     * @param req
+     * @param resp
+     * @throws IOException
+     */
     @Override
     public void addUserInfo(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String uname = req.getParameter("uname");

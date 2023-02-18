@@ -20,6 +20,8 @@
           <element id="library" level="project" name="Maven: taglibs:standard:1.1.2" />
           <element id="library" level="project" name="Maven: com.alibaba.fastjson2:fastjson2:2.0.23" />
           <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.15" />
+          <element id="library" level="project" name="Maven: com.github.penggle:kaptcha:2.3.2" />
+          <element id="library" level="project" name="Maven: com.jhlabs:filters:2.0.235-1" />
         </element>
       </element>
       <element id="directory" name="META-INF">

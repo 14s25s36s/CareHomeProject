@@ -16,6 +16,13 @@ public class CareInfoServiceImpl implements CareInfoService {
 
     CareInfoDao careInfoDao = new CareInfoDaoImpl();
 
+    /**
+     * 获取所有的护工个人信息
+     *
+     * @param req
+     * @param resp
+     * @throws IOException
+     */
     @Override
     public void allCareInfo(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String str_page = req.getParameter("page");
@@ -38,6 +45,13 @@ public class CareInfoServiceImpl implements CareInfoService {
         resp.getWriter().write(json);
     }
 
+    /**
+     * 删除护工信息
+     *
+     * @param req
+     * @param resp
+     * @throws IOException
+     */
     @Override
     public void deleteCareInfo(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String uid = req.getParameter("uid");
@@ -45,6 +59,13 @@ public class CareInfoServiceImpl implements CareInfoService {
         resp.getWriter().write(result);
     }
 
+    /**
+     * 修改护工信息
+     *
+     * @param req
+     * @param resp
+     * @throws IOException
+     */
     @Override
     public void updateCareInfo(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String uid = req.getParameter("uid");
@@ -57,6 +78,13 @@ public class CareInfoServiceImpl implements CareInfoService {
         resp.getWriter().write(result);
     }
 
+    /**
+     * 添加护工信息
+     *
+     * @param req
+     * @param resp
+     * @throws IOException
+     */
     @Override
     public void addCareInfo(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String uname = req.getParameter("uname");

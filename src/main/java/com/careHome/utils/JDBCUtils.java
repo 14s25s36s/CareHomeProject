@@ -87,7 +87,6 @@ public class JDBCUtils {
             prst = conn.prepareStatement(sql);
             prst.setObject(1, id);
             rs = prst.executeQuery();
-            System.out.println(rs);
             list = analyticalData(rs, clazz);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -200,10 +199,10 @@ public class JDBCUtils {
         return result;
     }
 
-    public static int getPreparedInt(String sql,Object... params) {
+    public static int getPreparedInt(String sql, Object... params) {
         Connection con = getConnection();
-        PreparedStatement ps=null;
-        ResultSet rs =null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         try {
             ps = con.prepareStatement(sql);
             for (int i = 1; i <= params.length; i++) {

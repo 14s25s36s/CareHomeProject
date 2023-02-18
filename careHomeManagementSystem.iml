@@ -59,5 +59,7 @@
     <orderEntry type="library" name="Maven: taglibs:standard:1.1.2" level="project" />
     <orderEntry type="library" name="Maven: com.alibaba.fastjson2:fastjson2:2.0.23" level="project" />
     <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.15" level="project" />
+    <orderEntry type="library" name="Maven: com.github.penggle:kaptcha:2.3.2" level="project" />
+    <orderEntry type="library" name="Maven: com.jhlabs:filters:2.0.235-1" level="project" />
   </component>
 </module>

@@ -16,10 +16,10 @@ table.on('tool(livelist)', function (obj) {
                     // console.log(result);
                     //关闭弹出框
                     layer.closeAll();
-                    if (result == null) {
-                        layer.msg("删除失败", {icon: 1});
-                    } else {
+                    if (result == "删除成功") {
                         layer.msg("删除成功", {icon: 1});
+                    } else {
+                        layer.msg("删除失败", {icon: 2});
                     }
                     //让表格重新加载数据
                     table.reload("livelist");

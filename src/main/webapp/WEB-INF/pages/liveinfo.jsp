@@ -39,7 +39,7 @@
     </thead>
 </table>
 
-<!-- START 添加员工 -->
+<!-- START 添加住户 -->
 <div id="addliveform" style="display:none;" class="layui-form" lay-filter="addliveform">
     <input type="hidden" name="id">
     <div class="layui-form-item">
@@ -68,7 +68,7 @@
         </div>
     </div>
 </div>
-<!-- END 添加员工 -->
+<!-- END 添加住户 -->
 
 <%--START行内按钮--%>
 <script type="text/html" id="btntool">

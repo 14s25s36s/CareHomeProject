@@ -15,6 +15,13 @@ import java.util.List;
 public class LiveHouseServiceImpl implements LiveHouseService {
     LiveHouseDao liveHouseDao = new LiveHouseDaoImpl();
 
+    /**
+     * 查看所有住户信息
+     *
+     * @param req
+     * @param resp
+     * @throws IOException
+     */
     @Override
     public void hasLive(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String str_page = req.getParameter("page");
@@ -37,13 +44,33 @@ public class LiveHouseServiceImpl implements LiveHouseService {
         resp.getWriter().write(json);
     }
 
+    /**
+     * 删除住户信息
+     *
+     * @param req
+     * @param resp
+     * @throws IOException
+     */
     @Override
     public void deleteLiveInfo(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String lid = req.getParameter("lid");
         int result = liveHouseDao.deletedOneLiveInfo(lid);
-        resp.getWriter().write(result);
+        String msg = null;
+        if (result > 0) {
+            msg = "删除成功";
+            resp.getWriter().write(msg);
+        } else {
+            msg = "删除失败";
+            resp.getWriter().write(msg);
+        }
     }
 
+    /**
+     * 前往修改住户信息页面
+     *
+     * @param req
+     * @param resp
+     */
     @Override
     public void toUpdateLiveInfo(HttpServletRequest req, HttpServletResponse resp) {
         String lid = req.getParameter("lid");
@@ -51,6 +78,12 @@ public class LiveHouseServiceImpl implements LiveHouseService {
         req.setAttribute("liveInfo", liveInfo);
     }
 
+    /**
+     * 修改住户信息
+     *
+     * @param req
+     * @param resp
+     */
     @Override
     public void updateLiveInfo(HttpServletRequest req, HttpServletResponse resp) {
         String lname = req.getParameter("lname");
@@ -70,6 +103,13 @@ public class LiveHouseServiceImpl implements LiveHouseService {
 
     }
 
+    /**
+     * 添加住户信息
+     *
+     * @param req
+     * @param resp
+     * @throws IOException
+     */
     @Override
     public void addLiveInfo(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String lname = req.getParameter("lname");

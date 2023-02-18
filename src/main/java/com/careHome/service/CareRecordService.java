@@ -6,4 +6,12 @@ import java.io.IOException;
 
 public interface CareRecordService {
     public void careInfo(HttpServletRequest req, HttpServletResponse resp) throws IOException;
+
+    public void deleteCareRecord(HttpServletRequest req, HttpServletResponse resp) throws IOException;
+
+    public void toUpdateCareRecord(HttpServletRequest req, HttpServletResponse resp);
+
+    public void updateCareRecord(HttpServletRequest req, HttpServletResponse resp);
+
+    public void addCareRecord(HttpServletRequest req, HttpServletResponse resp) throws IOException;
 }

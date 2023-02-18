@@ -62,8 +62,8 @@
     <div class="layui-form-item" pane="">
         <label class="layui-form-label">目前状态</label>
         <div class="layui-input-block">
-            <input type="radio" name="lstate" value="0" title="现用" ${("0" eq userInfo.getUstate())?'checked':""}>
-            <input type="radio" name="lstate" value="1" title="注销" ${("1" eq userInfo.getUstate())?'checked':""}>
+            <input type="radio" name="ustate" value="0" title="现用" ${("0" eq userInfo.getUstate())?'checked':""}>
+            <input type="radio" name="ustate" value="1" title="注销" ${("1" eq userInfo.getUstate())?'checked':""}>
         </div>
     </div>
     <div class="layui-form-item">

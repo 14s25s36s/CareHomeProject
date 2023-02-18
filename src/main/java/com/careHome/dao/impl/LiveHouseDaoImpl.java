@@ -7,6 +7,13 @@ import com.careHome.utils.JDBCUtils;
 import java.util.List;
 
 public class LiveHouseDaoImpl implements LiveHouseDao {
+    /**
+     * 查询所有的住户信息
+     *
+     * @param page
+     * @param limit
+     * @return
+     */
     @Override
     public List<LiveInfo> selectAllLiveInfo(int page, int limit) {
         String sql = "SELECT live.lid AS lid,live.lname AS lname,live.lage AS lage,live.lsex AS lsex" +
@@ -18,6 +25,11 @@ public class LiveHouseDaoImpl implements LiveHouseDao {
         return liveInfoList;
     }
 
+    /**
+     * 查询所有的住户数量
+     *
+     * @return
+     */
     @Override
     public int selectCountLiveHouse() {
         String sql = "SELECT COUNT(*) FROM liveinfo WHERE deleted=0";
@@ -25,6 +37,12 @@ public class LiveHouseDaoImpl implements LiveHouseDao {
         return count;
     }
 
+    /**
+     * 模糊查询某姓名条件下住户的信息数量
+     *
+     * @param checktext
+     * @return
+     */
     @Override
     public int selectCountLiveHouse(String checktext) {
         String checktexts = "%" + checktext + "%";
@@ -33,6 +51,14 @@ public class LiveHouseDaoImpl implements LiveHouseDao {
         return count;
     }
 
+    /**
+     * 模糊查询某一姓名条件下住户的信息
+     *
+     * @param checktext
+     * @param page
+     * @param limit
+     * @return
+     */
     @Override
     public List<LiveInfo> selectOneLiveHouseInfo(String checktext, int page, int limit) {
         checktext = "%" + checktext + "%";
@@ -44,6 +70,12 @@ public class LiveHouseDaoImpl implements LiveHouseDao {
         return liveInfoList;
     }
 
+    /**
+     * 通过id查询一条住户信息
+     *
+     * @param lid
+     * @return
+     */
     @Override
     public List<LiveInfo> selectOneLiveInfo(String lid) {
         String sql = "SELECT live.lid AS lid,live.lname AS lname,live.lage AS lage,live.lsex AS lsex" +
@@ -54,6 +86,12 @@ public class LiveHouseDaoImpl implements LiveHouseDao {
         return liveInfoList;
     }
 
+    /**
+     * 删除一条住户信息
+     *
+     * @param lid
+     * @return
+     */
     @Override
     public int deletedOneLiveInfo(String lid) {
         String sql = "UPDATE liveinfo SET deleted = 1 WHERE lid = ?";
@@ -61,6 +99,16 @@ public class LiveHouseDaoImpl implements LiveHouseDao {
         return result;
     }
 
+    /**
+     * 修改某一个住户信息
+     *
+     * @param lname
+     * @param lage
+     * @param lsex
+     * @param lstate
+     * @param lid
+     * @return
+     */
     @Override
     public int updateLiveInfo(String lname, String lage, String lsex, String lstate, String lid) {
         String sql = "UPDATE liveinfo SET lname=?,lage=?,lsex=?,lstate=? WHERE lid=?";
@@ -68,6 +116,15 @@ public class LiveHouseDaoImpl implements LiveHouseDao {
         return result;
     }
 
+    /**
+     * 添加一位住户信息
+     *
+     * @param lname
+     * @param lage
+     * @param lsex
+     * @param uid
+     * @return
+     */
     @Override
     public int addUserInfo(String lname, String lage, String lsex, String uid) {
         String sql = "INSERT INTO liveinfo (lname,lage,lsex,uid) VALUES (?,?,?,?)";

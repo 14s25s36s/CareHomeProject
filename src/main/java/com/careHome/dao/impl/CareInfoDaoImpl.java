@@ -7,6 +7,13 @@ import com.careHome.utils.JDBCUtils;
 import java.util.List;
 
 public class CareInfoDaoImpl implements CareInfoDao {
+    /**
+     * 查询所有的护工信息
+     *
+     * @param start
+     * @param limit
+     * @return
+     */
     @Override
     public List<UserInfo> selectAllCareInfo(int start, int limit) {
         String sql = "SELECT uid,uname,usex,uage,uaddress,ustate,aid,permissions,deleted " +
@@ -15,6 +22,11 @@ public class CareInfoDaoImpl implements CareInfoDao {
         return careInfoList;
     }
 
+    /**
+     * 查询所有护工的数量
+     *
+     * @return
+     */
     @Override
     public int selectCountCareInfo() {
         String sql = "SELECT COUNT(*) FROM userinfo WHERE permissions=1 AND deleted=0";
@@ -22,6 +34,14 @@ public class CareInfoDaoImpl implements CareInfoDao {
         return count;
     }
 
+    /**
+     * 用名字模糊查询护工的信息
+     *
+     * @param checktext
+     * @param start
+     * @param limit
+     * @return
+     */
     @Override
     public List<UserInfo> selectOneCareInfo(String checktext, int start, int limit) {
         checktext = "%" + checktext + "%";
@@ -31,6 +51,12 @@ public class CareInfoDaoImpl implements CareInfoDao {
         return careInfoList;
     }
 
+    /**
+     * 用名字模糊查询该名护工的数量
+     *
+     * @param checktext
+     * @return
+     */
     @Override
     public int selectCountCareInfo(String checktext) {
         checktext = "%" + checktext + "%";
@@ -39,6 +65,12 @@ public class CareInfoDaoImpl implements CareInfoDao {
         return count;
     }
 
+    /**
+     * 删除护工
+     *
+     * @param uid
+     * @return
+     */
     @Override
     public int deletedOneCareInfo(String uid) {
         String sql = "UPDATE userinfo SET deleted=1 WHERE uid=? AND permissions=1";
@@ -46,6 +78,17 @@ public class CareInfoDaoImpl implements CareInfoDao {
         return result;
     }
 
+    /**
+     * 修改护工信息
+     *
+     * @param uid
+     * @param uname
+     * @param usex
+     * @param uage
+     * @param uaddress
+     * @param ustate
+     * @return
+     */
     @Override
     public int updateCareInfo(String uid, String uname, String usex, String uage, String uaddress, String ustate) {
         String sql = "UPDATE userinfo SET uname=?,usex=?,uage=?,uaddress=?,ustate=? WHERE uid=? AND permissions=1";
@@ -53,6 +96,15 @@ public class CareInfoDaoImpl implements CareInfoDao {
         return result;
     }
 
+    /**
+     * 添加护工信息
+     *
+     * @param uname
+     * @param usex
+     * @param uage
+     * @param uaddress
+     * @return
+     */
     @Override
     public int addCareInfo(String uname, String usex, String uage, String uaddress) {
         String sql = "INSERT INTO userinfo (uname,usex,uage,uaddress,permissions) VALUES(?,?,?,?,1)";

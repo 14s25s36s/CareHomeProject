@@ -5,6 +5,8 @@ public class Account {
     private String useraccount;
     private String password;
     private Integer permissions;
+    private Integer astate;
+    private Integer deleted;
 
     @Override
     public String toString() {
@@ -13,7 +15,34 @@ public class Account {
                 ", useraccount='" + useraccount + '\'' +
                 ", password='" + password + '\'' +
                 ", permissions=" + permissions +
+                ", astate=" + astate +
+                ", deleted=" + deleted +
                 '}';
+    }
+
+    public Integer getAstate() {
+        return astate;
+    }
+
+    public void setAstate(Integer astate) {
+        this.astate = astate;
+    }
+
+    public Integer getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Integer deleted) {
+        this.deleted = deleted;
+    }
+
+    public Account(Integer aid, String useraccount, String password, Integer permissions, Integer astate, Integer deleted) {
+        this.aid = aid;
+        this.useraccount = useraccount;
+        this.password = password;
+        this.permissions = permissions;
+        this.astate = astate;
+        this.deleted = deleted;
     }
 
     public Integer getAid() {
@@ -51,10 +80,4 @@ public class Account {
     public Account() {
     }
 
-    public Account(Integer aid, String useraccount, String password, Integer permissions) {
-        this.aid = aid;
-        this.useraccount = useraccount;
-        this.password = password;
-        this.permissions = permissions;
-    }
 }
