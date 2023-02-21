@@ -14,24 +14,30 @@ function Pwd() {
 
 function checkcode() {
     var result = false;
-    var code = '';
-    var codetext = $("#codetext").val().toLowerCase();
-    code = str.toLowerCase();
-    console.log(codetext);
-    console.log(code);
-    if (codetext === '' || codetext === null || codetext === undefined) {
-        $("#codetext").siblings("label").remove();
-        $("#codetext").after("<label style='color: #ff0000'>验证码不能为空</label>");
-        result = false;
-    } else if (codetext != code) {
-        $("#codetext").siblings("label").remove();
-        $("#codetext").after("<label style='color: #ff0000'>验证码不正确</label>");
-        str = '';
-        run();
+    var vercode = $("#verifycode").val();
+    if (vercode === '' | vercode === null | vercode === undefined) {
+        $("#inputcode").siblings("label").remove();
+        $("#inputcode").after("<label style='color: #ff0000'>验证码不能为空</label>");
         result = false;
     } else {
-        $("#codetext").siblings("label").remove();
-        result = true;
+        $.ajax({
+            type: "post",
+            url: "login/judgecode",
+            async: false,
+            data: {vercode: vercode},
+            dataType: "text",
+            success: function (data) {
+                if (data == "验证码错误") {
+                    $("#inputcode").siblings("label").remove();
+                    $("#inputcode").after("<label style='color: #ff0000'>验证码错误</label>");
+                    changeCode();
+                    result = false;
+                } else if (data = "验证码相同") {
+                    $("#inputcode").siblings("label").remove();
+                    result = true;
+                }
+            }
+        });
     }
     return result;
 }
@@ -99,6 +105,10 @@ function EnsureUserAccountExist() {
     return result;
 }
 
+$("#verifycode").blur(function () {
+    checkcode();
+});
+
 $("#registeruseraccount").blur(function () {
     EnsureUserAccountExist();
 });
@@ -108,7 +118,6 @@ $(function () {
         layer.open({
             type: 1,
             area: ['500px', '350px'],
-            title: '请输入验证码',
             content: $("#logincodeform"),
             btn: ['确定', '取消'],
             btn1: function () {
@@ -123,16 +132,15 @@ $(function () {
                         dataType: "text",
                         success: function (data) {
                             if (data == "超级管理员登陆成功") {
-                                alert("超级管理员登陆成功!欢迎!")
                                 window.location.href = "login/adminmain";
                             } else if (data == "员工登陆成功") {
-                                alert("员工登陆成功!欢迎!")
                                 window.location.href = "login/caremain";
                             } else if (data == "登陆成功") {
-                                alert("登陆成功!欢迎!")
                                 window.location.href = "login/usermain";
                             } else {
                                 alert("登录失败，用户名或密码错误！");
+                                layer.closeAll();
+                                changeCode();
                                 $("#password").val("");
                                 $("#useraccount").focus().select();
                             }
@@ -195,34 +203,7 @@ $(function () {
     });
 });
 
-/* 验证码的js */
-var div = document.querySelector('#captcha');
-var characters = "QWETYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890";
-
-function getRandom(l, r) {
-    return parseInt(l + Math.random() * (r - l + 1));
+function changeCode() {
+    var src = "login/getVerifyCode?" + new Date().getTime(); //加时间戳，防止浏览器利用缓存
+    $('.verifyCode').attr("src", src);                  //jQuery写法
 }
-
-var str = '';
-
-function run() {
-    while (div.hasChildNodes()) {
-        div.removeChild(div.firstChild);
-    }
-    for (var i = 0; i < 4; i++) {
-        var span = document.createElement('span');
-        span.innerHTML = characters[getRandom(0, characters.length - 1)];
-        span.style.display = 'inline-block';
-        span.style.fontSize = getRandom(16, 32) + 'px';
-        span.style.color = 'rgb(' + getRandom(0, 200) + ',' + getRandom(0, 200) + ',' + getRandom(0, 200) + ')';
-        span.style.transform = 'translate(' + getRandom(-5, 5) + 'px, ' + getRandom(-5, 5) + 'px) rotate(' + getRandom(-20, 20) + 'deg)';
-        str += span.innerHTML;
-        div.appendChild(span);
-    }
-}
-
-run();
-div.addEventListener('click', function () {
-    str = '';
-    run(); //每次点击都刷新
-});

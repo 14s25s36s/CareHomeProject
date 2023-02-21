@@ -31,7 +31,20 @@
         <th lay-data="{field:'uid',sort:true}">ID</th>
         <th lay-data="{field:'uname'}">姓名</th>
         <th lay-data="{field:'usex'}">性别</th>
-        <th lay-data="{field:'uage'}">年龄</th>
+        <th lay-data="{field:'uage',templet:function(d){
+            console.log(d.uage);
+            if(d.uage===undefined){
+                return null;
+            }else{var agedatestr = JSON.stringify(d.uage);
+                var nowdate = new Date();
+                var nowyear = nowdate.getFullYear();
+                var ageyear = agedatestr.slice(1,5);
+                console.log(ageyear);
+                var age = Number(nowyear) - Number(ageyear);
+                return age;
+            }
+            }}">年龄
+        </th>
         <th lay-data="{field:'uaddress'}">家庭住址</th>
         <th lay-data="{field:'ustate',templet:'#userstate'}">状态</th>
         <th lay-data="{field:'aid'}">账户id</th>
@@ -79,6 +92,11 @@
     <div class="layui-btn-container">
         <button class="layui-btn layui-btn-sm layui-bg-red" lay-event="delete">删除</button>
         <button class="layui-btn layui-btn-sm" lay-event="update">编辑</button>
+        {{# if(d.ustate=='0'){ }}
+        <button class="layui-btn layui-btn-sm layui-bg-orange" id="ban" lay-event="ban">封号</button>
+        {{# }else{ }}
+        <button class="layui-btn layui-btn-sm layui-bg-orange" id="unban" lay-event="unban">解封</button>
+        {{# } }}
     </div>
 </script>
 <%--END行内按钮--%>
@@ -97,7 +115,9 @@
     </div>
 </script>
 <%-- END 表格头部按钮 --%>
+<script type="text/html" id="userage">
 
+</script>
 <script type="text/html" id="userstate">
     {{# if(d.ustate == '0'){ }}
     现用

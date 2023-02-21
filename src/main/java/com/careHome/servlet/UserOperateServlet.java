@@ -31,6 +31,8 @@ public class UserOperateServlet extends SuperServlet {
             resp.sendRedirect(req.getContextPath() + "/successuser.jsp");
         } else if ("adduserinfo".equals(action)) {
             userInfoService.addUserInfo(req, resp);
+        } else if ("updateuserstate".equals(action)) {
+            userInfoService.updateUserState(req, resp);
         }
     }
 

@@ -70,7 +70,7 @@ public class LoginDaoImpl implements LoginDao {
      */
     @Override
     public List<UserInfo> selectMyUserInfo(Integer aid) {
-        String sql = "SELECT uid,uname,usex,uage,uaddress,ustate,aid,permissions,deleted FROM userinfo WHERE aid=?";
+        String sql = "SELECT uid,uname,usex,uage,uaddress,ustate,telephone,emergencycall,aid,permissions,deleted FROM userinfo WHERE aid=?";
         List<UserInfo> userInfoList = JDBCUtils.selectData(sql, UserInfo.class, aid);
         return userInfoList;
     }

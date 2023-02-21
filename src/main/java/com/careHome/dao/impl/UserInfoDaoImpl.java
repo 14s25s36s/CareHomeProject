@@ -4,6 +4,7 @@ import com.careHome.dao.UserInfoDao;
 import com.careHome.pojo.LiveInfo;
 import com.careHome.pojo.UserInfo;
 import com.careHome.utils.JDBCUtils;
+import jdk.nashorn.internal.scripts.JD;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
      */
     @Override
     public List<UserInfo> selectAllUserInfo(int start, int limit) {
-        String sql = "SELECT uid,uname,usex,uage,uaddress,ustate,aid,permissions,deleted" +
+        String sql = "SELECT uid,uname,usex,uage,telephone,emergencycall,uaddress,ustate,aid,permissions,deleted" +
                 " FROM userinfo WHERE deleted=0 LIMIT ?,? ";
         List<UserInfo> userInfoList = JDBCUtils.selectData(sql, UserInfo.class, start, limit);
         return userInfoList;
@@ -47,7 +48,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
     @Override
     public List<UserInfo> selectOneUserInfo(String checktext, int start, int limit) {
         checktext = "%" + checktext + "%";
-        String sql = "SELECT uid,uname,usex,uage,uaddress,ustate,aid,permissions,deleted" +
+        String sql = "SELECT uid,uname,usex,uage,telephone,emergencycall,uaddress,ustate,aid,permissions,deleted" +
                 " FROM userinfo WHERE uname LIKE ? AND deleted=0 LIMIT ?,? ";
         List<UserInfo> userInfoList = JDBCUtils.selectData(sql, UserInfo.class, checktext, start, limit);
         return userInfoList;
@@ -88,7 +89,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
      */
     @Override
     public List<UserInfo> selectOneUserInfoByUid(String uid) {
-        String sql = "SELECT uid,uname,usex,uage,uaddress,ustate,aid,permissions,deleted" +
+        String sql = "SELECT uid,uname,usex,uage,telephone,emergencycall,uaddress,ustate,aid,permissions,deleted" +
                 " FROM userinfo WHERE uid=?";
         List<UserInfo> userInfoList = JDBCUtils.selectData(sql, UserInfo.class, uid);
         return userInfoList;
@@ -138,6 +139,14 @@ public class UserInfoDaoImpl implements UserInfoDao {
     public int checkLiveInfoExist(String uid) {
         String sql = "SELECT COUNT(*) FROM liveinfo WHERE uid=? AND deleted=0 LIMIT 1";
         int result = JDBCUtils.getPreparedInt(sql, uid);
+        return result;
+    }
+
+    @Override
+    public int updateUserState(String ustate, String uid) {
+        System.out.println("我进来了");
+        String sql = "UPDATE userinfo SET ustate=? WHERE uid=?";
+        int result = JDBCUtils.updateData(sql, ustate, uid);
         return result;
     }
 }

@@ -6,7 +6,7 @@ var form = layui.form;
 table.on('tool(userlist)', function (obj) {
     //当前行的数据
     var data = obj.data;
-    console.log(data);
+    // console.log(data);
     if (obj.event == 'delete') {
         layer.confirm('真的删除行么', function (index) {
             $.ajax({
@@ -28,6 +28,40 @@ table.on('tool(userlist)', function (obj) {
         });
     } else if (obj.event == 'update') {
         location.href = "user/toupdateuserinfo?uid=" + data.uid;
+    } else if (obj.event == 'ban') {
+        layer.confirm('真的要注销该用户吗', function (index) {
+            $.ajax({
+                url: "user/updateuserstate",
+                data: data,
+                success: function (result) {
+                    console.log(result);
+                    layer.closeAll();
+                    if (result == "修改成功") {
+                        layer.msg("修改状态成功", {icon: 1});
+                    } else if ("修改失败") {
+                        layer.msg("修改状态失败", {icon: 2});
+                    }
+                    table.reload("userlist");
+                }
+            });
+        });
+    } else if (obj.event == 'unban') {
+        layer.confirm('真的要解封该用户吗', function (index) {
+            $.ajax({
+                url: "user/updateuserstate",
+                data: data,
+                success: function (result) {
+                    console.log(result);
+                    layer.closeAll();
+                    if (result == "修改成功") {
+                        layer.msg("修改状态成功", {icon: 1});
+                    } else if ("修改失败") {
+                        layer.msg("修改状态失败", {icon: 2});
+                    }
+                    table.reload("userlist");
+                }
+            });
+        });
     }
 });
 

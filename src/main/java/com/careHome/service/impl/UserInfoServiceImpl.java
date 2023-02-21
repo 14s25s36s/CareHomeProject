@@ -120,4 +120,30 @@ public class UserInfoServiceImpl implements UserInfoService {
         int result = userInfoDao.addUserInfo(uname, usex, uage, uaddress);
         resp.getWriter().write(result);
     }
+
+    @Override
+    public void updateUserState(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String ustate = req.getParameter("ustate");
+        String uid = req.getParameter("uid");
+        System.out.println("ustate:" + ustate);
+        System.out.println("uid:" + uid);
+        int result = 0;
+        String unban = "0";
+        String ban = "1";
+        String msg = null;
+        if (ustate.equals(ban)) {
+            result = userInfoDao.updateUserState(unban, uid);
+        } else if (ustate.equals(unban)) {
+            result = userInfoDao.updateUserState(ban, uid);
+        }
+        System.out.println(result);
+        if (result > 0) {
+            msg = "修改成功";
+            resp.getWriter().write(msg);
+        } else {
+            msg = "修改失败";
+            resp.getWriter().write(msg);
+        }
+
+    }
 }

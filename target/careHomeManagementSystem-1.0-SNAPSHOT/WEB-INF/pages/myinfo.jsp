@@ -29,14 +29,14 @@
             <label class="layui-form-label">UID：</label>
             <div class="layui-input-inline">
                 <input type="text" name="uid" lay-verify="required"
-                       value="${userinfo.getUid()}" autocomplete="off"
+                       value="${USER_INFO.getUid()}" autocomplete="off"
                        class="layui-input" readonly>
             </div>
         </div>
         <label class="layui-form-label">姓名：</label>
         <div class="layui-input-inline">
             <input type="text" name="uname" lay-verify="required"
-                   value="${userinfo.getUname()}" autocomplete="off"
+                   value="${USER_INFO.getUname()}" autocomplete="off"
                    class="layui-input" readonly>
         </div>
     </div>
@@ -44,7 +44,7 @@
         <label class="layui-form-label">性别：</label>
         <div class="layui-input-inline">
             <input type="text" name="usex" lay-verify="required"
-                   value="${userinfo.getUsex()}" autocomplete="off"
+                   value="${USER_INFO.getUsex()}" autocomplete="off"
                    class="layui-input" readonly>
         </div>
     </div>
@@ -52,7 +52,7 @@
         <label class="layui-form-label">年龄：</label>
         <div class="layui-input-inline">
             <input type="text" name="uage" lay-verify="required"
-                   value="${userinfo.getUage()}" autocomplete="off"
+                   value="${USER_INFO.getUage()}" autocomplete="off"
                    class="layui-input" readonly>
         </div>
     </div>
@@ -60,7 +60,7 @@
         <label class="layui-form-label">家庭住址：</label>
         <div class="layui-input-inline">
             <input type="text" name="uaddress" lay-verify="required"
-                   value="${userinfo.getUaddress()}"
+                   value="${USER_INFO.getUaddress()}"
                    autocomplete="off"
                    class="layui-input" readonly>
         </div>
@@ -69,7 +69,7 @@
         <label class="layui-form-label">账户id：</label>
         <div class="layui-input-inline">
             <input type="text" name="aid" lay-verify="required"
-                   value="${userinfo.getAid()}" autocomplete="off"
+                   value="${USER_INFO.getAid()}" autocomplete="off"
                    class="layui-input" readonly>
         </div>
     </div>

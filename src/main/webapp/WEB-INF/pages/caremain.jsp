@@ -46,12 +46,11 @@
                 <a href="javascript:;">
                     <img src="//tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"
                          class="layui-nav-img">
-                    tester
+                    ${sessionScope.USER_INFO.uname}
                 </a>
                 <dl class="layui-nav-child">
-                    <dd><a href="">Your Profile</a></dd>
-                    <dd><a href="">Settings</a></dd>
-                    <dd><a href="">Sign out</a></dd>
+                    <dd><a href="javascript:;" _url="myinfo/tomyinfo">我的信息</a></dd>
+                    <dd><a href="javascript:;" id="exit" onclick="exit();">退出登陆</a></dd>
                 </dl>
             </li>
 
@@ -65,7 +64,6 @@
                 <li class="layui-nav-item layui-nav-itemed">
                     <a class="" href="javascript:;">人员管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;" _url="myinfo/tomyinfo">我的信息</a></dd>
                         <dd><a href="javascript:;" _url="live/livehouse">入住人员清单</a></dd>
                         <dd><a href="javascript:;" _url="docare/tocarerecord">入住人员护理记录</a></dd>
                     </dl>

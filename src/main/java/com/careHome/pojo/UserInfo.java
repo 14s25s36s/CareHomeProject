@@ -1,10 +1,14 @@
 package com.careHome.pojo;
 
+import java.util.Date;
+
 public class UserInfo {
     private Integer uid;
     private String uname;
     private String usex;
-    private Integer uage;
+    private Date uage;
+    private String telephone;
+    private String emergencycall;
     private String uaddress;
     private Integer ustate;
     private Integer aid;
@@ -18,32 +22,14 @@ public class UserInfo {
                 ", uname='" + uname + '\'' +
                 ", usex='" + usex + '\'' +
                 ", uage=" + uage +
+                ", telephone='" + telephone + '\'' +
+                ", emergencycall='" + emergencycall + '\'' +
                 ", uaddress='" + uaddress + '\'' +
                 ", ustate=" + ustate +
                 ", aid=" + aid +
                 ", permissions=" + permissions +
                 ", deleted=" + deleted +
                 '}';
-    }
-
-    public Integer getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(Integer deleted) {
-        this.deleted = deleted;
-    }
-
-    public UserInfo(Integer uid, String uname, String usex, Integer uage, String uaddress, Integer ustate, Integer aid, Integer permissions, Integer deleted) {
-        this.uid = uid;
-        this.uname = uname;
-        this.usex = usex;
-        this.uage = uage;
-        this.uaddress = uaddress;
-        this.ustate = ustate;
-        this.aid = aid;
-        this.permissions = permissions;
-        this.deleted = deleted;
     }
 
     public Integer getUid() {
@@ -70,12 +56,28 @@ public class UserInfo {
         this.usex = usex;
     }
 
-    public Integer getUage() {
+    public Date getUage() {
         return uage;
     }
 
-    public void setUage(Integer uage) {
+    public void setUage(Date uage) {
         this.uage = uage;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public String getEmergencycall() {
+        return emergencycall;
+    }
+
+    public void setEmergencycall(String emergencycall) {
+        this.emergencycall = emergencycall;
     }
 
     public String getUaddress() {
@@ -110,8 +112,28 @@ public class UserInfo {
         this.permissions = permissions;
     }
 
-    public UserInfo() {
+    public Integer getDeleted() {
+        return deleted;
     }
 
+    public void setDeleted(Integer deleted) {
+        this.deleted = deleted;
+    }
 
+    public UserInfo(Integer uid, String uname, String usex, Date uage, String telephone, String emergencycall, String uaddress, Integer ustate, Integer aid, Integer permissions, Integer deleted) {
+        this.uid = uid;
+        this.uname = uname;
+        this.usex = usex;
+        this.uage = uage;
+        this.telephone = telephone;
+        this.emergencycall = emergencycall;
+        this.uaddress = uaddress;
+        this.ustate = ustate;
+        this.aid = aid;
+        this.permissions = permissions;
+        this.deleted = deleted;
+    }
+
+    public UserInfo() {
+    }
 }

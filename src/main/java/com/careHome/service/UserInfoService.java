@@ -15,4 +15,6 @@ public interface UserInfoService {
     public void updateUserInfo(HttpServletRequest req, HttpServletResponse resp);
 
     public void addUserInfo(HttpServletRequest req, HttpServletResponse resp) throws IOException;
+
+    public void updateUserState(HttpServletRequest req, HttpServletResponse resp) throws IOException;
 }

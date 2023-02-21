@@ -60,6 +60,10 @@ public class LoginServlet extends SuperServlet {
         } else if ("loginexit".equals(action)) {
             req.getSession().removeAttribute(Sys.LOGIN_USER);
             resp.sendRedirect(req.getContextPath() + "/login/tologin");
+        } else if ("getVerifyCode".equals(action)) {
+            loginService.getVerifyCode(req, resp);
+        } else if ("judgecode".equals(action)) {
+            loginService.judgeCode(req, resp);
         }
 //        else if ("tomyinfo".equals(action)) {
 //            loginService.toMyInfo(req, resp);

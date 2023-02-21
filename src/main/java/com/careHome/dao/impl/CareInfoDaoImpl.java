@@ -16,7 +16,7 @@ public class CareInfoDaoImpl implements CareInfoDao {
      */
     @Override
     public List<UserInfo> selectAllCareInfo(int start, int limit) {
-        String sql = "SELECT uid,uname,usex,uage,uaddress,ustate,aid,permissions,deleted " +
+        String sql = "SELECT uid,uname,usex,uage,telephone,emergencycall,uaddress,ustate,aid,permissions,deleted " +
                 "FROM userinfo WHERE permissions=1 and deleted=0 LIMIT ?,?";
         List<UserInfo> careInfoList = JDBCUtils.selectData(sql, UserInfo.class, start, limit);
         return careInfoList;
@@ -45,7 +45,7 @@ public class CareInfoDaoImpl implements CareInfoDao {
     @Override
     public List<UserInfo> selectOneCareInfo(String checktext, int start, int limit) {
         checktext = "%" + checktext + "%";
-        String sql = "SELECT uid,uname,usex,uage,uaddress,ustate,aid,permissions,deleted" +
+        String sql = "SELECT uid,uname,usex,uage,telephone,emergencycall,uaddress,ustate,aid,permissions,deleted" +
                 " FROM userinfo WHERE uname LIKE ? AND permissions=1 AND deleted=0 LIMIT ?,? ";
         List<UserInfo> careInfoList = JDBCUtils.selectData(sql, UserInfo.class, checktext, start, limit);
         return careInfoList;

@@ -72,3 +72,14 @@ table.on('toolbar(livelist)', function (obj) {
         });
     }
 });
+
+function date(d) {
+    var agedatestr = JSON.stringify(d.uage);
+    var agedateformatstr = agedatestr.replace(/-/g, "/");
+    var nowdate = new Date();
+    var nowyear = nowdate.getFullYear();
+    var agedate = new Date(Date.parse(agedatestr));
+    var ageyear = agedate.getFullYear();
+    var age = Number(nowyear) - Number(ageyear);
+    return age;
+}

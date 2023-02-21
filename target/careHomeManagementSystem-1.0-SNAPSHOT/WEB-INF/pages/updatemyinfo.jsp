@@ -26,27 +26,27 @@
 <form class="layui-form layui-form-pane" action="myinfo/updatemyinfo">
     <div class="layui-form-item">
         <input type="hidden" name="uid" lay-verify="required"
-               value="${userinfo.getUid()}" autocomplete="off"
+               value="${USER_INFO.getUid()}" autocomplete="off"
                class="layui-input">
         <label class="layui-form-label">姓名：</label>
         <div class="layui-input-inline">
             <input type="text" name="uname" lay-verify="required"
-                   value="${userinfo.getUname()}" autocomplete="off"
+                   value="${USER_INFO.getUname()}" autocomplete="off"
                    class="layui-input">
         </div>
     </div>
     <div class="layui-form-item" pane="">
         <label class="layui-form-label">性别</label>
         <div class="layui-input-block">
-            <input type="radio" name="usex" value="男" title="男" ${("男" eq userinfo.getUsex())?'checked':""}>
-            <input type="radio" name="usex" value="女" title="女" ${("女" eq userinfo.getUsex())?'checked':""}>
+            <input type="radio" name="usex" value="男" title="男" ${("男" eq USER_INFO.getUsex())?'checked':""}>
+            <input type="radio" name="usex" value="女" title="女" ${("女" eq USER_INFO.getUsex())?'checked':""}>
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">年龄：</label>
         <div class="layui-input-inline">
             <input type="text" name="uage" lay-verify="required"
-                   value="${userinfo.getUage()}" autocomplete="off"
+                   value="${USER_INFO.getUage()}" autocomplete="off"
                    class="layui-input">
         </div>
     </div>
@@ -54,13 +54,13 @@
         <label class="layui-form-label">家庭住址：</label>
         <div class="layui-input-inline">
             <input type="text" name="uaddress" lay-verify="required"
-                   value="${userinfo.getUaddress()}"
+                   value="${USER_INFO.getUaddress()}"
                    autocomplete="off"
                    class="layui-input">
         </div>
     </div>
     <input type="hidden" name="aid" lay-verify="required"
-           value="${userinfo.getAid()}" autocomplete="off"
+           value="${USER_INFO.getAid()}" autocomplete="off"
            class="layui-input">
     <div class="layui-form-item">
         <button class="layui-btn" lay-submit="" lay-filter="demo2">修改</button>

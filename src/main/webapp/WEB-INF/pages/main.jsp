@@ -46,12 +46,11 @@
                 <a href="javascript:;">
                     <img src="//tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"
                          class="layui-nav-img">
-                    tester
+                    ${sessionScope.USER_INFO.uname}
                 </a>
                 <dl class="layui-nav-child">
-                    <dd><a href="">Your Profile</a></dd>
-                    <dd><a href="">Settings</a></dd>
-                    <dd><a href="">Sign out</a></dd>
+                    <dd><a href="javascript:;" _url="myinfo/tomyinfo">我的信息</a></dd>
+                    <dd><a href="javascript:;" id="exit" onclick="exit();">退出登陆</a></dd>
                 </dl>
             </li>
 
@@ -68,19 +67,8 @@
                         <dd><a href="javascript:;" _url="user/touserinfo">用户管理</a></dd>
                         <dd><a href="javascript:;" _url="live/livehouse">入住人员清单</a></dd>
                         <dd><a href="javascript:;" _url="care/tocareinfo">工作人员信息</a></dd>
-                        <dd><a href="javascript:;" _url="myinfo/tomyinfo">我的信息</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;">menu group 2</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">list 1</a></dd>
-                        <dd><a href="javascript:;">list 2</a></dd>
-                        <dd><a href="">超链接</a></dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item"><a href="javascript:;">click menu item</a></li>
-                <li class="layui-nav-item"><a href="">the links</a></li>
             </ul>
         </div>
     </div>
@@ -128,6 +116,12 @@
         });
     });
 
+    function exit() {
+        var result = confirm("确定要退出吗？");
+        if (result) {
+            window.parent.frames.location.href = "login/loginexit";
+        }
+    }
 </script>
 
 </body>

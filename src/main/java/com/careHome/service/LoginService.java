@@ -21,4 +21,7 @@ public interface LoginService {
 
     public void myFamilyName(HttpServletRequest req, HttpServletResponse resp) throws IOException;
 
+    public void getVerifyCode(HttpServletRequest req, HttpServletResponse resp);
+
+    public void judgeCode(HttpServletRequest req, HttpServletResponse resp) throws IOException;
 }

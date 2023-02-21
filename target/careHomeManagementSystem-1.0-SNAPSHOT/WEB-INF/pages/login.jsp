@@ -47,15 +47,22 @@
     <div class="right"></div>
 </div>
 <div id="logincodeform" style="display:none;" class="layui-form" lay-filter="logincodeform">
-    <div>
-        <h1 style="margin: 5px auto">请输入验证码</h1>
+    <br>
+    <div style="text-align: center;">
+        <span style="font-weight: bold;font-size: 35px;">请输入验证码</span>
     </div>
-    <div>
-        <label style="margin: 5px auto">如看不清，请点击验证码刷新</label>
-    </div>
-    <div id="captchabox">
-        <input id="codetext" type="text" class="input" maxlength="4" required>
-        <div id="captcha"></div>
+    <div style="text-align: center;">
+        <%-- 验证码输入框 --%>
+        <div id="inputcode">
+            <input class="verifyInput form-field" id="verifycode" name="verifyInput" placeholder="请输入验证码">
+        </div>
+        <br>
+        <%-- 验证码图片 --%>
+        <img class="verifyCode" onclick="changeCode();" src="login/getVerifyCode" style="border: 2px solid #ddd;
+    border-radius: 4px;">
+        <div>
+            <label style="margin: 5px auto;color: grey">如看不清，请点击验证码刷新</label>
+        </div>
     </div>
 </div>
 <!-- START 注册用户 -->

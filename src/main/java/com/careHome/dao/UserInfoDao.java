@@ -22,4 +22,6 @@ public interface UserInfoDao {
     public int addUserInfo(String uname, String usex, String uage, String uaddress);
 
     public int checkLiveInfoExist(String uid);
+
+    public int updateUserState(String ustate,String uid);
 }
