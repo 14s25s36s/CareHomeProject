@@ -57,12 +57,12 @@
     <div class="layui-form-item" pane="">
         <label class="layui-form-label">目前状态</label>
         <div class="layui-input-block">
-            <input type="radio" name="lstate" value="0" title="在院" ${("0" eq liveInfo.getLstate())?'checked':""}>
-            <input type="radio" name="lstate" value="1" title="出院" ${("1" eq liveInfo.getLstate())?'checked':""}>
+            <input type="radio" name="lstate" value="0" title="可以自理" ${("0" eq liveInfo.getLstate())?'checked':""}>
+            <input type="radio" name="lstate" value="1" title="不能自理" ${("1" eq liveInfo.getLstate())?'checked':""}>
         </div>
     </div>
     <div class="layui-form-item">
-        <button class="layui-btn" lay-submit="" lay-filter="demo2">跳转式提交</button>
+        <button class="layui-btn" lay-submit="" lay-filter="demo2">修改</button>
     </div>
 </form>
 <script type="text/javascript" src="static/lib/layui/layui.all.js" charset="UTF-8"></script>

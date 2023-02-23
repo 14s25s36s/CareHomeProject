@@ -32,6 +32,8 @@ public interface LoginDao {
      */
     public int addUserAccount(String useraccount, String password);
 
+    public int addUserAccountByAdministrator(String useraccount, String permissions);
+
     public int addAidtoUserInfo(int aid);
 
     public List<UserInfo> selectMyUserInfo(Integer aid);

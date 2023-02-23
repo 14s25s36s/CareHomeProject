@@ -17,7 +17,11 @@ public class LoginDaoImpl implements LoginDao {
      */
     @Override
     public List<Account> selectOnAccountInfo(String userAccount) {
-        String sql = "SELECT aid,useraccount,password,permissions,astate,deleted FROM account WHERE useraccount=?";
+        String sql = "SELECT ac.aid AS aid,ac.useraccount AS useraccount,ac.password AS password" +
+                ",ac.permissions AS permissions,ac.astate AS astate,ac.deleted AS deleted" +
+                " FROM account AS ac" +
+                " JOIN userinfo AS user ON user.aid=ac.aid" +
+                " WHERE ac.useraccount=? AND user.ustate=0 AND user.deleted=0";
         List<Account> accountList = JDBCUtils.selectData(sql, Account.class, userAccount);
         return accountList;
     }
@@ -46,6 +50,20 @@ public class LoginDaoImpl implements LoginDao {
     public int addUserAccount(String useraccount, String password) {
         String sql = "INSERT INTO account (useraccount,password) VALUES (?,?)";
         int result = JDBCUtils.insertData(sql, useraccount, password);
+        return result;
+    }
+
+    /**
+     * 超级管理员插入用户时给予的默认账号
+     *
+     * @param useraccount
+     * @param permissions
+     * @return
+     */
+    @Override
+    public int addUserAccountByAdministrator(String useraccount, String permissions) {
+        String sql = "INSERT INTO account (useraccount,password,permissions) VALUES (?,'Aa123456.',?)";
+        int result = JDBCUtils.insertData(sql, useraccount, permissions);
         return result;
     }
 

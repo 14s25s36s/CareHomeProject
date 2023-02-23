@@ -32,20 +32,20 @@
         <th lay-data="{field:'uname'}">姓名</th>
         <th lay-data="{field:'usex'}">性别</th>
         <th lay-data="{field:'uage',templet:function(d){
-            console.log(d.uage);
             if(d.uage===undefined){
                 return null;
             }else{var agedatestr = JSON.stringify(d.uage);
                 var nowdate = new Date();
                 var nowyear = nowdate.getFullYear();
                 var ageyear = agedatestr.slice(1,5);
-                console.log(ageyear);
                 var age = Number(nowyear) - Number(ageyear);
                 return age;
             }
             }}">年龄
         </th>
         <th lay-data="{field:'uaddress'}">家庭住址</th>
+        <th lay-data="{field:'telephone'}">手机号码</th>
+        <th lay-data="{field:'emergencycall'}">应急电话</th>
         <th lay-data="{field:'ustate',templet:'#userstate'}">状态</th>
         <th lay-data="{field:'aid'}">账户id</th>
         <th lay-data="{field:'permissions',templet:'#accountpermission'}">账户权限</th>
@@ -71,18 +71,57 @@
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">年龄</label>
+        <label class="layui-form-label">手机号码</label>
         <div class="layui-input-block">
-            <input type="text" name="uage" autocomplete="off" placeholder="请输入年龄" class="layui-input">
+            <input type="text" name="telephone" autocomplete="off" placeholder="请输入手机号码" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">应急电话</label>
+        <div class="layui-input-block">
+            <input type="text" name="emergencycall" autocomplete="off" placeholder="请输入应急电话" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">出生日期</label>
+            <div class="layui-input-block">
+                <input type="text" name="uage" id="date1" autocomplete="off" class="layui-input">
+            </div>
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">家庭住址</label>
-        <div class="layui-input-block">
-            <input type="text" name="uaddress" autocomplete="off" placeholder="请输入家庭住址" class="layui-input">
+        <div class="layui-input-inline">
+            <select id="province" lay-filter="province" lay-verify="required" name="province" _child="#city">
+                <option selected disabled>请选择省</option>
+            </select>
+        </div>
+        <div class="layui-input-inline">
+            <select id="city" lay-filter="city" lay-verify="required" name="city" _child="#area">
+                <option selected disabled>请选择市</option>
+            </select>
+        </div>
+        <div class="layui-input-inline">
+            <select id="area" lay-filter="area" lay-verify="required" name="area" _child="">
+                <option selected disabled>请选择县/区</option>
+            </select>
         </div>
     </div>
-
+    <div class="layui-form-item">
+        <label class="layui-form-label">账号</label>
+        <div class="layui-input-block">
+            <input type="text" name="useraccount" autocomplete="off" placeholder="请输入账号" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item" pane="">
+        <label class="layui-form-label">账号权限</label>
+        <div class="layui-input-block">
+            <input type="radio" name="permissions" value="0" title="超级管理员">
+            <input type="radio" name="permissions" value="1" title="管理员">
+            <input type="radio" name="permissions" value="2" title="普通用户" checked>
+        </div>
+    </div>
 </div>
 <!-- END 添加用户 -->
 
@@ -115,6 +154,7 @@
     </div>
 </script>
 <%-- END 表格头部按钮 --%>
+
 <script type="text/html" id="userage">
 
 </script>
@@ -122,7 +162,7 @@
     {{# if(d.ustate == '0'){ }}
     现用
     {{# } else { }}
-    注销
+    封号
     {{# } }}
 </script>
 <script type="text/html" id="accountpermission">
@@ -137,6 +177,8 @@
     {{# } }}
 </script>
 <script type="text/javascript" src="static/lib/layui/layui.all.js" charset="UTF-8"></script>
+<%--<script type="text/javascript" src="static/js/jquery.js"></script>--%>
+<script type="text/javascript" src="static/js/addressandage.js"></script>
 <script type="text/javascript" src="static/js/operateuser.js"></script>
 </table>
 </body>

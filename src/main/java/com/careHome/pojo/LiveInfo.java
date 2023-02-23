@@ -8,6 +8,8 @@ public class LiveInfo {
     private Integer uid;
     private Integer lstate;
     private String uname;
+    private Integer careuid;
+    private String careuname;
     private Integer deleted;
 
     @Override
@@ -20,35 +22,10 @@ public class LiveInfo {
                 ", uid=" + uid +
                 ", lstate=" + lstate +
                 ", uname='" + uname + '\'' +
+                ", careuid=" + careuid +
+                ", careuname=" + careuname +
                 ", deleted=" + deleted +
                 '}';
-    }
-
-    public Integer getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(Integer deleted) {
-        this.deleted = deleted;
-    }
-
-    public LiveInfo(Integer lid, String lname, Integer lage, String lsex, Integer uid, Integer lstate, String uname, Integer deleted) {
-        this.lid = lid;
-        this.lname = lname;
-        this.lage = lage;
-        this.lsex = lsex;
-        this.uid = uid;
-        this.lstate = lstate;
-        this.uname = uname;
-        this.deleted = deleted;
-    }
-
-    public String getUname() {
-        return uname;
-    }
-
-    public void setUname(String uname) {
-        this.uname = uname;
     }
 
     public Integer getLid() {
@@ -99,7 +76,51 @@ public class LiveInfo {
         this.lstate = lstate;
     }
 
-    public LiveInfo() {
+    public String getUname() {
+        return uname;
     }
 
+    public void setUname(String uname) {
+        this.uname = uname;
+    }
+
+    public Integer getCareuid() {
+        return careuid;
+    }
+
+    public void setCareuid(Integer careuid) {
+        this.careuid = careuid;
+    }
+
+    public String getCareuname() {
+        return careuname;
+    }
+
+    public void setCareuname(String careuname) {
+        this.careuname = careuname;
+    }
+
+    public Integer getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Integer deleted) {
+        this.deleted = deleted;
+    }
+
+    public LiveInfo(Integer lid, String lname, Integer lage, String lsex, Integer uid, Integer lstate, String uname, Integer careuid, String careuname, Integer deleted) {
+        this.lid = lid;
+        this.lname = lname;
+        this.lage = lage;
+        this.lsex = lsex;
+        this.uid = uid;
+        this.lstate = lstate;
+        this.uname = uname;
+        this.careuid = careuid;
+        this.careuname = careuname;
+        this.deleted = deleted;
+    }
+
+    public LiveInfo() {
+    }
 }

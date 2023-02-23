@@ -79,7 +79,7 @@ table.on('toolbar(userlist)', function (obj) {
         //弹出层
         layer.open({
             type: 1,
-            area: ['500px', '350px'],
+            area: ['750px', '600px'],
             title: '添加用户',
             content: $("#adduserform"),
             btn: ['保存', '取消'],
@@ -91,17 +91,35 @@ table.on('toolbar(userlist)', function (obj) {
                 $.ajax({
                     url: 'user/adduserinfo',
                     data: formdata,
-                    success: function () {
+                    success: function (result) {
                         //关闭弹出层
-                        layer.closeAll();
-                        //提示编辑成功
-                        layer.msg("编辑成功", {icon: 1, time: 3000});
-                        //刷新表格
-                        table.reload("userlist");
+                        if (result == "添加成功") {
+                            //提示添加成功
+                            layer.msg("添加成功", {icon: 1, time: 3000});
+                            layer.closeAll();
+                            //刷新表格
+                            table.reload("userlist");
+                        } else if (result == "添加失败") {
+                            layer.msg("添加失败", {icon: 2, time: 3000});
+                            layer.closeAll();
+                            table.reload("userlist");
+                        }
                     }
                 });
 
             }
         });
+    } else if (obj.event == 'ban') {
+        var value = '0';
+        table.reload('userlist', {
+            where: {ustate: value}
+        });
     }
+});
+form.on('select(selectustate)', function () {
+    var value = $("#selectustate").val();
+    console.log(value);
+    table.reload('userlist', {
+        where: {ustate: value}
+    });
 });

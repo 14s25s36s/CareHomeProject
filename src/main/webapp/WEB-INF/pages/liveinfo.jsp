@@ -33,6 +33,7 @@
         <th lay-data="{field:'lage'}">年龄</th>
         <th lay-data="{field:'lsex'}">性别</th>
         <th lay-data="{field:'uname'}">家属姓名</th>
+        <th lay-data="{field:'careuname'}">护工姓名</th>
         <th lay-data="{field:'lstate',templet:'#state'}">状态</th>
         <th lay-data="{toolbar:'#btntool'}">操作</th>
     </tr>
@@ -97,9 +98,9 @@
     {{# if(d.lstate===''){ }}
     未办理
     {{# } else if(d.lstate===0){ }}
-    住院
+    可以自理
     {{# } else { }}
-    出院
+    不能自理
     {{# } }}
 </script>
 <script type="text/javascript" src="static/lib/layui/layui.all.js" charset="UTF-8"></script>

@@ -19,7 +19,7 @@ public interface LiveHouseDao {
 
     public int deletedOneLiveInfo(String lid);
 
-    public int updateLiveInfo(String lname, String lage, String lsex, String lstate, String lid);
+    public int updateLiveInfo(String lname, String lage, String lsex, String lid);
 
     public int addUserInfo(String lname, String lage, String lsex, String uid);
 }

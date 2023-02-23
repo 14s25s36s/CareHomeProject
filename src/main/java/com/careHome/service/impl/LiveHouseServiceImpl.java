@@ -92,7 +92,7 @@ public class LiveHouseServiceImpl implements LiveHouseService {
         String lstate = req.getParameter("lstate");
         String lid = req.getParameter("lid");
         String msg = null;
-        int result = liveHouseDao.updateLiveInfo(lname, lage, lsex, lstate, lid);
+        int result = liveHouseDao.updateLiveInfo(lname, lage, lsex, lid);
         if (result > 0) {
             msg = "修改成功";
             req.getSession().setAttribute("msg", msg);

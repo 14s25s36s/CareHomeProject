@@ -45,25 +45,30 @@
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">年龄</label>
-        <div class="layui-input-inline">
-            <input type="text" name="uage" lay-verify="required" value="${userInfo.getUage()}" autocomplete="off"
-                   class="layui-input">
+        <div class="layui-inline">
+            <label class="layui-form-label">出生日期</label>
+            <div class="layui-input-block">
+                <input type="text" name="uage" id="date1" value="${userInfo.getUage()}" autocomplete="off"
+                       class="layui-input">
+            </div>
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">家庭住址</label>
         <div class="layui-input-inline">
-            <input type="text" name="uaddress" lay-verify="required" value="${userInfo.getUaddress()}"
-                   autocomplete="off"
-                   class="layui-input">
+            <select id="province" lay-filter="province" lay-verify="required" name="province" _child="#city">
+                <option value="${addressMap.get("provinceid")}">${addressMap.get("province")}</option>
+            </select>
         </div>
-    </div>
-    <div class="layui-form-item" pane="">
-        <label class="layui-form-label">目前状态</label>
-        <div class="layui-input-block">
-            <input type="radio" name="ustate" value="0" title="现用" ${("0" eq userInfo.getUstate())?'checked':""}>
-            <input type="radio" name="ustate" value="1" title="注销" ${("1" eq userInfo.getUstate())?'checked':""}>
+        <div class="layui-input-inline">
+            <select id="city" lay-filter="city" lay-verify="required" name="city" _child="#area">
+                <option value="${addressMap.get("cityid")}">${addressMap.get("city")}</option>
+            </select>
+        </div>
+        <div class="layui-input-inline">
+            <select id="area" lay-filter="area" lay-verify="required" name="area" _child="">
+                <option value="${addressMap.get("areaid")}">${addressMap.get("area")}</option>
+            </select>
         </div>
     </div>
     <div class="layui-form-item">
@@ -71,6 +76,8 @@
     </div>
 </form>
 <script type="text/javascript" src="static/lib/layui/layui.all.js" charset="UTF-8"></script>
+<script type="text/javascript" src="static/js/jquery.js"></script>
+<script type="text/javascript" src="static/js/addressandage.js"></script>
 <script type="text/javascript">
     layui.use('form', function () {
         const form = layui.form;
