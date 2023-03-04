@@ -39,9 +39,21 @@
     <tr>
         <th lay-data="{field:'lid',sort:true}">ID</th>
         <th lay-data="{field:'lname'}">姓名</th>
-        <th lay-data="{field:'lage'}">年龄</th>
+        <th lay-data="{field:'lage',templet:function(d){
+            if(d.lage===undefined){
+                return null;
+            }else{var agedatestr = JSON.stringify(d.lage);
+                var nowdate = new Date();
+                var nowyear = nowdate.getFullYear();
+                var ageyear = agedatestr.slice(1,5);
+                var age = Number(nowyear) - Number(ageyear);
+                return age;
+            }
+            }}">年龄
+        </th>
         <th lay-data="{field:'lsex'}">性别</th>
         <th lay-data="{field:'uname'}">家属姓名</th>
+        <th lay-data="{field:'careuname'}">护工姓名</th>
         <th lay-data="{field:'lstate',templet:'#state'}">状态</th>
         <th lay-data="{toolbar:'#btntool'}">操作</th>
     </tr>
@@ -57,15 +69,15 @@
 </script>
 <%--END行内按钮--%>
 
-<script type="text/html" id="state">
-    {{# if(d.lstate===''){ }}
-    未办理
-    {{# } else if(d.lstate===0){ }}
-    住院
-    {{# } else { }}
-    出院
-    {{# } }}
-</script>
+<%--<script type="text/html" id="state">--%>
+<%--    {{# if(d.lstate===''){ }}--%>
+<%--    未办理--%>
+<%--    {{# } else if(d.lstate===0){ }}--%>
+<%--    住院--%>
+<%--    {{# } else { }}--%>
+<%--    出院--%>
+<%--    {{# } }}--%>
+<%--</script>--%>
 <script type="text/javascript" src="static/lib/layui/layui.all.js" charset="UTF-8"></script>
 <script type="text/javascript" src="static/js/jquery.js"></script>
 <script type="text/javascript" src="static/js/myfamily.js"></script>

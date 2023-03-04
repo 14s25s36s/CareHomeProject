@@ -155,6 +155,8 @@ public class UserInfoServiceImpl implements UserInfoService {
         String uname = req.getParameter("uname");
         String usex = req.getParameter("usex");
         String uage = req.getParameter("uage");
+        String telephone = req.getParameter("telephone");
+        String emergencycall = req.getParameter("emergencycall");
         Integer provinceid = Integer.parseInt(req.getParameter("province"));
         Integer cityid = Integer.parseInt(req.getParameter("city"));
         Integer areaid = Integer.parseInt(req.getParameter("area"));
@@ -178,7 +180,7 @@ public class UserInfoServiceImpl implements UserInfoService {
         }
         String uaddress = province + "-" + city + "-" + area;
         String msg = null;
-        int result = userInfoDao.updateUserInfo(uid, uname, usex, uage, uaddress);
+        int result = userInfoDao.updateUserInfo(uid, uname, usex, uage, uaddress, telephone, emergencycall);
         if (result > 0) {
             msg = "修改成功";
             req.getSession().setAttribute("msg", msg);
@@ -236,10 +238,12 @@ public class UserInfoServiceImpl implements UserInfoService {
         Integer uid = null;
         int rowCount = -1;
         if (accountResult > 0) {
-            accountList = loginDao.selectOnAccountInfo(useraccount);
-            accoun = accountList.get(0);
-            aid = accoun.getAid();
-            result = userInfoDao.addUserInfo(uname, usex, uage, uaddress, permissions, telephone, emergencycall, aid);
+            accountList = loginDao.selectOnAccountInfoByUserAccount(useraccount);
+            if (accountList.size() > 0) {
+                accoun = accountList.get(0);
+                aid = accoun.getAid();
+                result = userInfoDao.addUserInfo(uname, usex, uage, uaddress, permissions, telephone, emergencycall, aid);
+            }
         }
         String msg = null;
         if (result > 0) {
@@ -267,8 +271,6 @@ public class UserInfoServiceImpl implements UserInfoService {
     public void updateUserState(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String ustate = req.getParameter("ustate");
         String uid = req.getParameter("uid");
-        System.out.println("ustate:" + ustate);
-        System.out.println("uid:" + uid);
         int result = 0;
         String unban = "0";
         String ban = "1";
@@ -278,7 +280,6 @@ public class UserInfoServiceImpl implements UserInfoService {
         } else if (ustate.equals(unban)) {
             result = userInfoDao.updateUserState(ban, uid);
         }
-        System.out.println(result);
         if (result > 0) {
             msg = "修改成功";
             resp.getWriter().write(msg);

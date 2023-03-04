@@ -30,7 +30,18 @@
     <tr>
         <th lay-data="{field:'lid',sort:true}">ID</th>
         <th lay-data="{field:'lname'}">姓名</th>
-        <th lay-data="{field:'lage'}">年龄</th>
+        <th lay-data="{field:'lage',templet:function(d){
+            if(d.lage===undefined){
+                return null;
+            }else{var agedatestr = JSON.stringify(d.lage);
+                var nowdate = new Date();
+                var nowyear = nowdate.getFullYear();
+                var ageyear = agedatestr.slice(1,5);
+                var age = Number(nowyear) - Number(ageyear);
+                return age;
+            }
+            }}">年龄
+        </th>
         <th lay-data="{field:'lsex'}">性别</th>
         <th lay-data="{field:'uname'}">家属姓名</th>
         <th lay-data="{field:'careuname'}">护工姓名</th>
@@ -50,9 +61,12 @@
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">年龄</label>
-        <div class="layui-input-block">
-            <input type="text" name="lage" autocomplete="off" placeholder="请输入年龄" class="layui-input">
+        <div class="layui-inline">
+            <label class="layui-form-label">出生日期</label>
+            <div class="layui-input-block">
+                <input type="text" name="lage" id="date1" placeholder="请选择出生日期" autocomplete="off"
+                       class="layui-input" readonly>
+            </div>
         </div>
     </div>
     <div class="layui-form-item" pane="">
@@ -66,6 +80,26 @@
         <label class="layui-form-label">家属用户id</label>
         <div class="layui-input-block">
             <input type="text" name="uid" autocomplete="off" placeholder="请输入家属id" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item" pane="">
+        <div class="layui-inline">
+            <label class="layui-form-label">选择护工</label>
+            <div class="layui-input-inline">
+                <select id="careuid" name="careuid" lay-verify="required">
+                    <option disabled selected>---请选择护工---</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item" pane="">
+        <div class="layui-inline">
+            <label class="layui-form-label">自理能力</label>
+            <div class="layui-input-inline">
+                <select id="lstate" name="lstate" lay-verify="required">
+                    <option disabled selected>---请选择自理能力---</option>
+                </select>
+            </div>
         </div>
     </div>
 </div>
@@ -94,17 +128,46 @@
 </script>
 <%-- END 表格头部按钮 --%>
 
-<script type="text/html" id="state">
-    {{# if(d.lstate===''){ }}
-    未办理
-    {{# } else if(d.lstate===0){ }}
-    可以自理
-    {{# } else { }}
-    不能自理
-    {{# } }}
-</script>
+<%--<script type="text/html" id="state">--%>
+<%--    {{# if(d.lstate===''){ }}--%>
+<%--    未办理--%>
+<%--    {{# } else if(d.lstate===0){ }}--%>
+<%--    可以自理--%>
+<%--    {{# } else { }}--%>
+<%--    不能自理--%>
+<%--    {{# } }}--%>
+<%--</script>--%>
 <script type="text/javascript" src="static/lib/layui/layui.all.js" charset="UTF-8"></script>
 <script type="text/javascript" src="static/js/operate.js"></script>
+<script type="text/javascript" src="static/js/addressandage.js"></script>
+<script type="text/javascript">
+    $.ajax({
+        url: "live/carelist",
+        data: {},
+        success: function (data) {
+            data = JSON.parse(data);
+            for (var i = 0; i < data.length; i++) {
+                var item = data[i];
+                var $option = $("<option></option>").val(item.careuid).text(item.careuname);
+                $("#careuid").append($option);
+            }
+            form.render();
+        }
+    });
+    $.ajax({
+        url: "live/statelist",
+        data: {},
+        success: function (data) {
+            data = JSON.parse(data);
+            for (var i = 0; i < data.length; i++) {
+                var item = data[i];
+                var $option = $("<option></option>").val(item.lstate).text(item.lstatename);
+                $("#lstate").append($option);
+            }
+            form.render();
+        }
+    });
+</script>
 </table>
 </body>
 </html>

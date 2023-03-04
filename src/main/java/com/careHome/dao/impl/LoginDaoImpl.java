@@ -120,9 +120,9 @@ public class LoginDaoImpl implements LoginDao {
      * @return
      */
     @Override
-    public int addFamilyInfo(String lname, String lage, String lsex, Integer uid) {
-        String sql = "INSERT INTO liveinfo (lname,lage,lsex,uid) VALUES (?,?,?,?)";
-        int result = JDBCUtils.insertData(sql, lname, lage, lsex, uid);
+    public int addFamilyInfo(String lname, String lage, String lsex, Integer uid, String careuid, String lstate) {
+        String sql = "INSERT INTO liveinfo (lname,lage,lsex,uid,careuid,lstate) VALUES (?,?,?,?,?,?)";
+        int result = JDBCUtils.insertData(sql, lname, lage, lsex, uid, careuid, lstate);
         return result;
     }
 
@@ -137,8 +137,11 @@ public class LoginDaoImpl implements LoginDao {
     @Override
     public List<LiveInfo> selectMyFamilyInfo(int uid, int start, int limit) {
         String sql = "SELECT live.lid AS lid,live.lname AS lname,live.lage AS lage,live.lsex AS lsex" +
-                ",live.uid AS uid,live.lstate AS lstate,live.deleted AS deleted,user.uname AS uname" +
+                ",live.uid AS uid,state.lstatename AS lstate,live.deleted AS deleted,user.uname AS uname" +
+                ",live.careuid AS careuid,care.careuname AS careuname" +
                 " FROM liveinfo AS live JOIN userinfo AS user ON live.uid=user.uid" +
+                " JOIN lstatename AS state ON live.lstate=state.lstate" +
+                " JOIN careuser AS care ON live.careuid=care.careuid" +
                 " WHERE live.uid=? AND live.deleted=0 AND user.deleted=0 LIMIT ?,? ";
 
         List<LiveInfo> liveInfoList = JDBCUtils.selectData(sql, LiveInfo.class, uid, start, limit);
@@ -170,9 +173,12 @@ public class LoginDaoImpl implements LoginDao {
     @Override
     public List<LiveInfo> selectOneMyFamilyInfo(String lname, Integer uid, int start, int limit) {
         String sqls = "SELECT live.lid AS lid,live.lname AS lname,live.lage AS lage,live.lsex AS lsex" +
-                ",live.uid AS uid,live.lstate AS lstate,live.deleted AS deleted,user.uname AS uname" +
+                ",live.uid AS uid,state.lstatename AS lstate,live.deleted AS deleted,user.uname AS uname" +
+                ",live.careuid AS careuid,care.careuname AS careuname" +
                 " FROM liveinfo AS live JOIN userinfo AS user ON live.uid=user.uid" +
-                " WHERE live.lname=? AND live.uid=? AND live.deleted=0 LIMIT ?,?";
+                " JOIN lstatename AS state ON live.lstate=state.lstate" +
+                " JOIN careuser AS care ON live.careuid=care.careuid" +
+                " WHERE lname=? AND live.uid=? AND live.deleted=0 AND user.deleted=0 LIMIT ?,? ";
         List<LiveInfo> liveInfoList = JDBCUtils.selectData(sqls, LiveInfo.class, lname, uid, start, limit);
         return liveInfoList;
     }
@@ -188,7 +194,6 @@ public class LoginDaoImpl implements LoginDao {
     public int selectCountFamily(String lname, Integer uid) {
         String sql = "SELECT COUNT(*) FROM liveinfo WHERE lname=? AND uid=? AND deleted=0";
         int count = JDBCUtils.getPreparedInt(sql, lname, uid);
-        System.out.println(count);
         return count;
     }
 
@@ -201,9 +206,12 @@ public class LoginDaoImpl implements LoginDao {
     @Override
     public List<LiveInfo> selectOneMyFamilyInfo(Integer uid) {
         String sqls = "SELECT live.lid AS lid,live.lname AS lname,live.lage AS lage,live.lsex AS lsex" +
-                ",live.uid AS uid,live.lstate AS lstate,live.deleted AS deleted,user.uname AS uname" +
+                ",live.uid AS uid,state.lstatename AS lstate,live.deleted AS deleted,user.uname AS uname" +
+                ",live.careuid AS careuid,care.careuname AS careuname" +
                 " FROM liveinfo AS live JOIN userinfo AS user ON live.uid=user.uid" +
-                " WHERE live.uid=? AND live.deleted=0";
+                " JOIN lstatename AS state ON live.lstate=state.lstate" +
+                " JOIN careuser AS care ON live.careuid=care.careuid" +
+                " WHERE live.uid=? AND live.deleted=0 AND user.deleted=0";
         List<LiveInfo> liveInfoList = JDBCUtils.selectData(sqls, LiveInfo.class, uid);
         return liveInfoList;
     }
@@ -213,6 +221,14 @@ public class LoginDaoImpl implements LoginDao {
         String sql = "UPDATE account SET password=? WHERE aid=?";
         int result = JDBCUtils.updateData(sql, password, aid);
         return result;
+    }
+
+    @Override
+    public List<Account> selectOnAccountInfoByUserAccount(String useraccount) {
+        String sql = "SELECT aid,useraccount,password,permissions,astate,deleted " +
+                "FROM account WHERE useraccount=? AND deleted=0";
+        List<Account> accountList = JDBCUtils.selectData(sql, Account.class, useraccount);
+        return accountList;
     }
 
 

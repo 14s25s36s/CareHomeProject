@@ -40,7 +40,7 @@ public interface LoginDao {
 
     public int updateMyInfo(String uid, String uname, String usex, String uage, String uaddress);
 
-    public int addFamilyInfo(String lname, String lage, String lsex, Integer uid);
+    public int addFamilyInfo(String lname, String lage, String lsex, Integer uid, String careuid, String lstate);
 
     public List<LiveInfo> selectMyFamilyInfo(int uid, int start, int limit);
 
@@ -53,4 +53,6 @@ public interface LoginDao {
     public List<LiveInfo> selectOneMyFamilyInfo(Integer uid);
 
     public int updatePassword(Integer aid, String password);
+
+    public List<Account> selectOnAccountInfoByUserAccount(String useraccount);
 }

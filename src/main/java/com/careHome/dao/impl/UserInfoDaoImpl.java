@@ -136,9 +136,9 @@ public class UserInfoDaoImpl implements UserInfoDao {
      * @return
      */
     @Override
-    public int updateUserInfo(String uid, String uname, String usex, String uage, String uaddress) {
-        String sql = "UPDATE userinfo SET uname=?,usex=?,uage=?,uaddress=? WHERE uid=?";
-        int result = JDBCUtils.updateData(sql, uname, usex, uage, uaddress, uid);
+    public int updateUserInfo(String uid, String uname, String usex, String uage, String uaddress, String telephone, String emergencycall) {
+        String sql = "UPDATE userinfo SET uname=?,usex=?,uage=?,uaddress=?,telephone=?,emergencycall=? WHERE uid=?";
+        int result = JDBCUtils.updateData(sql, uname, usex, uage, uaddress, telephone, emergencycall, uid);
         return result;
     }
 
@@ -187,7 +187,6 @@ public class UserInfoDaoImpl implements UserInfoDao {
 
     @Override
     public int updateUserState(String ustate, String uid) {
-        System.out.println("我进来了");
         String sql = "UPDATE userinfo SET ustate=? WHERE uid=?";
         int result = JDBCUtils.updateData(sql, ustate, uid);
         return result;

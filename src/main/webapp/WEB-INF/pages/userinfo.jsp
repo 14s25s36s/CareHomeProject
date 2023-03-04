@@ -73,20 +73,22 @@
     <div class="layui-form-item">
         <label class="layui-form-label">手机号码</label>
         <div class="layui-input-block">
-            <input type="text" name="telephone" autocomplete="off" placeholder="请输入手机号码" class="layui-input">
+            <input type="text" id="telephone" name="telephone" autocomplete="off" placeholder="请输入手机号码"
+                   class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">应急电话</label>
         <div class="layui-input-block">
-            <input type="text" name="emergencycall" autocomplete="off" placeholder="请输入应急电话" class="layui-input">
+            <input type="text" id="emergencycall" name="emergencycall" autocomplete="off" placeholder="请输入应急电话"
+                   class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <div class="layui-inline">
             <label class="layui-form-label">出生日期</label>
             <div class="layui-input-block">
-                <input type="text" name="uage" id="date1" autocomplete="off" class="layui-input">
+                <input type="text" name="uage" id="date1" autocomplete="off" class="layui-input" readonly>
             </div>
         </div>
     </div>
@@ -111,7 +113,8 @@
     <div class="layui-form-item">
         <label class="layui-form-label">账号</label>
         <div class="layui-input-block">
-            <input type="text" name="useraccount" autocomplete="off" placeholder="请输入账号" class="layui-input">
+            <input type="text" id="useraccount" name="useraccount" autocomplete="off" placeholder="请输入账号"
+                   class="layui-input">
         </div>
     </div>
     <div class="layui-form-item" pane="">

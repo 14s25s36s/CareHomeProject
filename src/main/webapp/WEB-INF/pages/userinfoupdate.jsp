@@ -23,7 +23,7 @@
           tppabs="static/lib/layui/css/layui.css" media="all">
 </head>
 <body>
-<form class="layui-form layui-form-pane" action="user/updateuserinfo">
+<form class="layui-form layui-form-pane" action="user/updateuserinfo" onsubmit="return telcheck()&&emercheck();">
     <div class="layui-form-item">
         <div class="layui-input-inline">
             <input type="hidden" name="uid" value="${userInfo.getUid()}">
@@ -49,7 +49,7 @@
             <label class="layui-form-label">出生日期</label>
             <div class="layui-input-block">
                 <input type="text" name="uage" id="date1" value="${userInfo.getUage()}" autocomplete="off"
-                       class="layui-input">
+                       class="layui-input" readonly>
             </div>
         </div>
     </div>
@@ -72,12 +72,30 @@
         </div>
     </div>
     <div class="layui-form-item">
-        <button class="layui-btn" lay-submit="" lay-filter="demo2">跳转式提交</button>
+        <label class="layui-form-label">电话号码</label>
+        <div class="layui-input-inline">
+            <input type="text" id="telephone" name="telephone" lay-verify="required" value="${userInfo.getTelephone()}"
+                   autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">应急电话</label>
+        <div class="layui-input-inline">
+            <input type="text" id="emergencycall" name="emergencycall" lay-verify="required"
+                   value="${userInfo.getEmergencycall()}"
+                   autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <button class="layui-btn" lay-submit="" lay-filter="demo2">修改</button>
     </div>
 </form>
 <script type="text/javascript" src="static/lib/layui/layui.all.js" charset="UTF-8"></script>
 <script type="text/javascript" src="static/js/jquery.js"></script>
 <script type="text/javascript" src="static/js/addressandage.js"></script>
+<script type="text/javascript" src="static/js/operateuser.js"></script>
 <script type="text/javascript">
     layui.use('form', function () {
         const form = layui.form;

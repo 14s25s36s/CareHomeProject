@@ -9,9 +9,9 @@ public interface CareRecordService {
 
     public void deleteCareRecord(HttpServletRequest req, HttpServletResponse resp) throws IOException;
 
-    public void toUpdateCareRecord(HttpServletRequest req, HttpServletResponse resp);
-
-    public void updateCareRecord(HttpServletRequest req, HttpServletResponse resp);
+    public void updateCareRecord(HttpServletRequest req, HttpServletResponse resp) throws IOException;
 
     public void addCareRecord(HttpServletRequest req, HttpServletResponse resp) throws IOException;
+
+    public void getLiveByCareid(HttpServletRequest req, HttpServletResponse resp) throws IOException;
 }

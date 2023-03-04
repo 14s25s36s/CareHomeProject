@@ -10,7 +10,5 @@ public interface CareInfoService {
 
     public void deleteCareInfo(HttpServletRequest req, HttpServletResponse resp) throws IOException;
 
-    public void updateCareInfo(HttpServletRequest req, HttpServletResponse resp) throws IOException;
-
-    public void addCareInfo(HttpServletRequest req, HttpServletResponse resp) throws IOException;
+    public void getLiveByCare(HttpServletRequest req, HttpServletResponse resp) throws IOException;
 }

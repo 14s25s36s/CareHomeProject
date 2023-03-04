@@ -46,7 +46,7 @@ table.on('toolbar(livelist)', function (obj) {
         //弹出层
         layer.open({
             type: 1,
-            area: ['500px', '350px'],
+            area: ['500px', '550px'],
             title: '添加用户',
             content: $("#addliveform"),
             btn: ['保存', '取消'],

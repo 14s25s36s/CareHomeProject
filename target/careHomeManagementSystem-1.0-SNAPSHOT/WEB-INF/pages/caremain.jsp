@@ -68,16 +68,6 @@
                         <dd><a href="javascript:;" _url="docare/tocarerecord">入住人员护理记录</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;">menu group 2</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">list 1</a></dd>
-                        <dd><a href="javascript:;">list 2</a></dd>
-                        <dd><a href="">超链接</a></dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item"><a href="javascript:;">click menu item</a></li>
-                <li class="layui-nav-item"><a href="">the links</a></li>
             </ul>
         </div>
     </div>
@@ -124,6 +114,13 @@
             $("#main").attr("src", url);
         });
     });
+
+    function exit() {
+        var result = confirm("确定要退出吗？");
+        if (result) {
+            window.parent.frames.location.href = "login/loginexit";
+        }
+    }
 
 </script>
 

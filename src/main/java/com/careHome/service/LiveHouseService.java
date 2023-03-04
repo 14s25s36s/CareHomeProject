@@ -15,4 +15,8 @@ public interface LiveHouseService {
     public void updateLiveInfo(HttpServletRequest req, HttpServletResponse resp);
 
     public void addLiveInfo(HttpServletRequest req, HttpServletResponse resp) throws IOException;
+
+    public void getCareList(HttpServletRequest req, HttpServletResponse resp) throws IOException;
+
+    public void getStateList(HttpServletRequest req, HttpServletResponse resp) throws IOException;
 }

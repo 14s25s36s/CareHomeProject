@@ -40,10 +40,12 @@
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">年龄</label>
-        <div class="layui-input-inline">
-            <input type="text" name="lage" lay-verify="required" value="${liveInfo.getLage()}" autocomplete="off"
-                   class="layui-input">
+        <div class="layui-inline">
+            <label class="layui-form-label">出生日期</label>
+            <div class="layui-input-block">
+                <input type="text" name="lage" id="date1" value="${liveInfo.getLage()}" autocomplete="off"
+                       class="layui-input" readonly>
+            </div>
         </div>
     </div>
     <div class="layui-form-item" pane="">
@@ -55,10 +57,21 @@
         </div>
     </div>
     <div class="layui-form-item" pane="">
+        <div class="layui-inline">
+            <label class="layui-form-label">选择护工</label>
+            <div class="layui-input-inline">
+                <select id="careuid" name="careuid" lay-verify="required">
+                    <option disabled selected name="careuid"
+                            value="${liveInfo.getCareuid()}">${liveInfo.getCareuname()}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item" pane="">
         <label class="layui-form-label">目前状态</label>
         <div class="layui-input-block">
-            <input type="radio" name="lstate" value="0" title="可以自理" ${("0" eq liveInfo.getLstate())?'checked':""}>
-            <input type="radio" name="lstate" value="1" title="不能自理" ${("1" eq liveInfo.getLstate())?'checked':""}>
+            <input type="radio" name="lstate" value="0" title="可以自理" ${("可以自理" eq liveInfo.getLstate())?'checked':""}>
+            <input type="radio" name="lstate" value="1" title="不能自理" ${("不能自理" eq liveInfo.getLstate())?'checked':""}>
         </div>
     </div>
     <div class="layui-form-item">
@@ -66,10 +79,25 @@
     </div>
 </form>
 <script type="text/javascript" src="static/lib/layui/layui.all.js" charset="UTF-8"></script>
+<script type="text/javascript" src="static/js/jquery.js"></script>
+<script type="text/javascript" src="static/js/addressandage.js"></script>
 <script type="text/javascript">
     layui.use('form', function () {
         const form = layui.form;
         form.render();
+    });
+    $.ajax({
+        url: "live/carelist",
+        data: {},
+        success: function (data) {
+            data = JSON.parse(data);
+            for (var i = 0; i < data.length; i++) {
+                var item = data[i];
+                var $option = $("<option></option>").val(item.careuid).text(item.careuname);
+                $("#careuid").append($option);
+            }
+            form.render();
+        }
     });
 </script>
 </body>

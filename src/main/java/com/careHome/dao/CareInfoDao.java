@@ -1,5 +1,6 @@
 package com.careHome.dao;
 
+import com.careHome.pojo.LiveInfo;
 import com.careHome.pojo.UserInfo;
 
 import java.util.List;
@@ -15,7 +16,5 @@ public interface CareInfoDao {
 
     public int deletedOneCareInfo(String uid);
 
-    public int updateCareInfo(String uid, String uname, String usex, String uage, String uaddress, String ustate);
-
-    public int addCareInfo(String uname, String usex, String uage, String uaddress);
+    public List<LiveInfo> getLiveInfoByCare(String careid);
 }

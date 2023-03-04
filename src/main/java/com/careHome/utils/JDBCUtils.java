@@ -148,7 +148,7 @@ public class JDBCUtils {
                         String fieldValue = rs.getString(fieldName);
                         field.set(e, fieldValue);
                     } else if (fieldClass == Date.class) {
-                        Date fieldValue = rs.getDate(fieldName);
+                        Date fieldValue = rs.getTimestamp(fieldName);
                         field.set(e, fieldValue);
                     } else {
                         Object fieldValue = rs.getObject(fieldName);

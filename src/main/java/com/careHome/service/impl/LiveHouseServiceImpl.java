@@ -3,7 +3,9 @@ package com.careHome.service.impl;
 import com.alibaba.fastjson2.JSON;
 import com.careHome.dao.LiveHouseDao;
 import com.careHome.dao.impl.LiveHouseDaoImpl;
+import com.careHome.pojo.Care;
 import com.careHome.pojo.LiveInfo;
+import com.careHome.pojo.Lstate;
 import com.careHome.service.LiveHouseService;
 import com.careHome.utils.LayListData;
 
@@ -78,6 +80,13 @@ public class LiveHouseServiceImpl implements LiveHouseService {
         req.setAttribute("liveInfo", liveInfo);
     }
 
+    @Override
+    public void getStateList(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        List<Lstate> lstateList = liveHouseDao.getStateList();
+        String json = JSON.toJSONString(lstateList);
+        resp.getWriter().write(json);
+    }
+
     /**
      * 修改住户信息
      *
@@ -89,10 +98,11 @@ public class LiveHouseServiceImpl implements LiveHouseService {
         String lname = req.getParameter("lname");
         String lage = req.getParameter("lage");
         String lsex = req.getParameter("lsex");
+        String careuid = req.getParameter("careuid");
         String lstate = req.getParameter("lstate");
         String lid = req.getParameter("lid");
         String msg = null;
-        int result = liveHouseDao.updateLiveInfo(lname, lage, lsex, lid);
+        int result = liveHouseDao.updateLiveInfo(lname, lage, lsex, careuid, lstate, lid);
         if (result > 0) {
             msg = "修改成功";
             req.getSession().setAttribute("msg", msg);
@@ -116,8 +126,17 @@ public class LiveHouseServiceImpl implements LiveHouseService {
         String lage = req.getParameter("lage");
         String lsex = req.getParameter("lsex");
         String uid = req.getParameter("uid");
-        int result = liveHouseDao.addUserInfo(lname, lage, lsex, uid);
+        String careuid = req.getParameter("careuid");
+        String lstate = req.getParameter("lstate");
+        int result = liveHouseDao.addUserInfo(lname, lage, lsex, uid, careuid, lstate);
         resp.getWriter().write(result);
+    }
+
+    @Override
+    public void getCareList(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        List<Care> careList = liveHouseDao.getCareList();
+        String json = JSON.toJSONString(careList);
+        resp.getWriter().write(json);
     }
 
 }

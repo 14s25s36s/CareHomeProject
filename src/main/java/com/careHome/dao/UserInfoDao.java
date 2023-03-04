@@ -17,7 +17,7 @@ public interface UserInfoDao {
 
     public List<UserInfo> selectOneUserInfoByUid(String uid);
 
-    public int updateUserInfo(String uid, String uname, String usex, String uage, String uaddress);
+    public int updateUserInfo(String uid, String uname, String usex, String uage, String uaddress, String telephone, String emergencycall);
 
     public int addUserInfo(String uname, String usex, String uage, String uaddress, String permissions, String telephone, String emergencycall, Integer aid);
 

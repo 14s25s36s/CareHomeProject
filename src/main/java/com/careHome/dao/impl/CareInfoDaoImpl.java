@@ -1,6 +1,7 @@
 package com.careHome.dao.impl;
 
 import com.careHome.dao.CareInfoDao;
+import com.careHome.pojo.LiveInfo;
 import com.careHome.pojo.UserInfo;
 import com.careHome.utils.JDBCUtils;
 
@@ -78,38 +79,17 @@ public class CareInfoDaoImpl implements CareInfoDao {
         return result;
     }
 
-    /**
-     * 修改护工信息
-     *
-     * @param uid
-     * @param uname
-     * @param usex
-     * @param uage
-     * @param uaddress
-     * @param ustate
-     * @return
-     */
     @Override
-    public int updateCareInfo(String uid, String uname, String usex, String uage, String uaddress, String ustate) {
-        String sql = "UPDATE userinfo SET uname=?,usex=?,uage=?,uaddress=?,ustate=? WHERE uid=? AND permissions=1";
-        int result = JDBCUtils.updateData(sql, uname, usex, uage, uaddress, ustate, uid);
-        return result;
-    }
-
-    /**
-     * 添加护工信息
-     *
-     * @param uname
-     * @param usex
-     * @param uage
-     * @param uaddress
-     * @return
-     */
-    @Override
-    public int addCareInfo(String uname, String usex, String uage, String uaddress) {
-        String sql = "INSERT INTO userinfo (uname,usex,uage,uaddress,permissions) VALUES(?,?,?,?,1)";
-        int result = JDBCUtils.insertData(sql, uname, usex, uage, uaddress);
-        return result;
+    public List<LiveInfo> getLiveInfoByCare(String careuid) {
+        String sql = "SELECT live.lid AS lid,live.lname AS lname,live.lage AS lage,live.lsex AS lsex" +
+                ",live.uid AS uid,state.lstatename AS lstate,live.deleted AS deleted,user.uname AS uname" +
+                ",live.careuid AS careuid,care.careuname AS careuname" +
+                " FROM liveinfo AS live JOIN userinfo AS user ON live.uid=user.uid" +
+                " JOIN lstatename AS state ON live.lstate=state.lstate" +
+                " JOIN careuser AS care ON live.careuid=care.careuid" +
+                " WHERE live.deleted=0 AND user.deleted=0 AND live.careuid=?";
+        List<LiveInfo> liveInfoList = JDBCUtils.selectData(sql, LiveInfo.class, careuid);
+        return liveInfoList;
     }
 
 }

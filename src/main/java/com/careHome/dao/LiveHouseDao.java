@@ -1,6 +1,8 @@
 package com.careHome.dao;
 
+import com.careHome.pojo.Care;
 import com.careHome.pojo.LiveInfo;
+import com.careHome.pojo.Lstate;
 import com.careHome.pojo.UserInfo;
 
 import java.util.List;
@@ -19,7 +21,11 @@ public interface LiveHouseDao {
 
     public int deletedOneLiveInfo(String lid);
 
-    public int updateLiveInfo(String lname, String lage, String lsex, String lid);
+    public int updateLiveInfo(String lname, String lage, String lsex, String careuid, String lstate, String lid);
 
-    public int addUserInfo(String lname, String lage, String lsex, String uid);
+    public int addUserInfo(String lname, String lage, String lsex, String uid, String careuid, String lstate);
+
+    public List<Care> getCareList();
+
+    public List<Lstate> getStateList();
 }

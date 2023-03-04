@@ -27,8 +27,34 @@ table.on('tool(carerecord)', function (obj) {
             });
         });
     } else if (obj.event == 'update') {
-        location.href = "docare/toupdatecarerecord?careid=" + data.careid;
-
+        // location.href = "docare/toupdatecarerecord?careid=" + data.careid;
+        form.val("updatecarerecord", data);
+        layer.open({
+            type: 1,
+            title: "修改护理记录",
+            area: ["400px", "300px"],
+            btn: ["修改", "取消"],
+            content: $("#updatecarerecord"),
+            btn1: function () {
+                var formdata = form.val("updatecarerecord");
+                $.ajax({
+                    url: 'docare/updatecarerecord',
+                    data: formdata,
+                    success: function (data) {
+                        //关闭弹出层
+                        layer.closeAll();
+                        //提示编辑成功
+                        if (data == "修改成功") {
+                            layer.msg("修改成功", {icon: 1, time: 3000});
+                        } else if (data == "修改失败") {
+                            layer.msg("修改失败", {icon: 2, time: 3000});
+                        }
+                        //刷新表格
+                        table.reload("carerecord");
+                    }
+                });
+            }
+        });
     }
 });
 

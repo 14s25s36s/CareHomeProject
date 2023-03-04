@@ -23,10 +23,8 @@ public class CareStaffServlet extends SuperServlet {
             careInfoService.allCareInfo(req, resp);
         } else if ("deletecareinfo".equals(action)) {
             careInfoService.deleteCareInfo(req, resp);
-        } else if ("updatecareinfo".equals(action)) {
-            careInfoService.updateCareInfo(req, resp);
-        } else if ("addcareinfo".equals(action)) {
-            careInfoService.addCareInfo(req,resp);
+        } else if ("getlivebycare".equals(action)) {
+            careInfoService.getLiveByCare(req, resp);
         }
     }
 

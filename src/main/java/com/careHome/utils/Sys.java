@@ -9,4 +9,8 @@ public class Sys {
      * 用来存储当前用户的个人信息
      */
     public static final String USER_INFO = "USER_INFO";
+    /**
+     * 用来存储当前用户的地址信息
+     */
+    public static final String USER_ADDRESS = "USER_ADDRESS";
 }

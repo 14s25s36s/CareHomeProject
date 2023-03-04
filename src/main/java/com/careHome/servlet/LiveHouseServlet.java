@@ -31,6 +31,10 @@ public class LiveHouseServlet extends SuperServlet {
             resp.sendRedirect(req.getContextPath() + "/success.jsp");
         } else if ("addliveinfo".equals(action)) {
             liveHouseService.addLiveInfo(req, resp);
+        } else if ("carelist".equals(action)) {
+            liveHouseService.getCareList(req, resp);
+        } else if ("statelist".equals(action)) {
+            liveHouseService.getStateList(req, resp);
         }
     }
 

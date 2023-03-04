@@ -17,10 +17,8 @@ public class MyInfoServlet extends SuperServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = (String) req.getAttribute(ACTION_NAME);
         if ("tomyinfo".equals(action)) {
-            myInfoService.toMyInfo(req, resp);
             req.getRequestDispatcher("../WEB-INF/pages/myinfo.jsp").forward(req, resp);
         } else if ("toupdatemyinfo".equals(action)) {
-            myInfoService.toMyInfo(req, resp);
             req.getRequestDispatcher("../WEB-INF/pages/updatemyinfo.jsp").forward(req, resp);
         } else if ("updatemyinfo".equals(action)) {
             myInfoService.updateMyInfo(req, resp);

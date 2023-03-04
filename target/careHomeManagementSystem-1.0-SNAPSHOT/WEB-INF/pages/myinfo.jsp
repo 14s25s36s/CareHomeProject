@@ -66,6 +66,23 @@
         </div>
     </div>
     <div class="layui-form-item">
+        <label class="layui-form-label">电话号码</label>
+        <div class="layui-input-inline">
+            <input type="text" id="telephone" name="telephone" lay-verify="required" value="${USER_INFO.getTelephone()}"
+                   autocomplete="off"
+                   class="layui-input" readonly>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">应急电话</label>
+        <div class="layui-input-inline">
+            <input type="text" id="emergencycall" name="emergencycall" lay-verify="required"
+                   value="${USER_INFO.getEmergencycall()}"
+                   autocomplete="off"
+                   class="layui-input" readonly>
+        </div>
+    </div>
+    <div class="layui-form-item">
         <label class="layui-form-label">账户id：</label>
         <div class="layui-input-inline">
             <input type="text" name="aid" lay-verify="required"

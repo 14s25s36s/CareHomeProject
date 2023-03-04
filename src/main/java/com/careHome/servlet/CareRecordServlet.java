@@ -23,14 +23,12 @@ public class CareRecordServlet extends SuperServlet {
             careRecordService.careInfo(req, resp);
         } else if ("deletecarerecord".equals(action)) {
             careRecordService.deleteCareRecord(req, resp);
-        } else if ("toupdatecarerecord".equals(action)) {
-            careRecordService.toUpdateCareRecord(req, resp);
-            req.getRequestDispatcher("../WEB-INF/pages/carerecordupdate.jsp").forward(req, resp);
         } else if ("updatecarerecord".equals(action)) {
             careRecordService.updateCareRecord(req, resp);
-            resp.sendRedirect(req.getContextPath() + "/successcare.jsp");
         } else if ("addcarerecord".equals(action)) {
             careRecordService.addCareRecord(req, resp);
+        } else if ("getlivebycareid".equals(action)) {
+            careRecordService.getLiveByCareid(req, resp);
         }
     }
 

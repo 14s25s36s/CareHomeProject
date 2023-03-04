@@ -1,11 +1,11 @@
 package com.careHome.service.impl;
 
 import com.alibaba.fastjson2.JSON;
+import com.careHome.dao.AreaDao;
 import com.careHome.dao.LoginDao;
+import com.careHome.dao.impl.AreaDaoImpl;
 import com.careHome.dao.impl.LoginDaoImpl;
-import com.careHome.pojo.Account;
-import com.careHome.pojo.LiveInfo;
-import com.careHome.pojo.UserInfo;
+import com.careHome.pojo.*;
 import com.careHome.service.LoginService;
 import com.careHome.utils.LayListData;
 import com.careHome.utils.MD5Utils;
@@ -18,12 +18,15 @@ import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class LoginServiceImpl implements LoginService {
 
     LoginDao loginDao = new LoginDaoImpl();
+    AreaDao areaDao = new AreaDaoImpl();
 
     /**
      * 登陆的方法
@@ -39,6 +42,15 @@ public class LoginServiceImpl implements LoginService {
         Account account = null;
         String decryptPwd = null;
         String dbPwd = null;
+        String[] areas = null;
+        Province province = null;
+        City city = null;
+        Area area = null;
+        Integer provinceid = null;
+        Integer cityid = null;
+        Integer areaid = null;
+        String address = null;
+        Map<String, Object> addressMap = new HashMap<String, Object>();
         List<Account> accountList = loginDao.selectOnAccountInfo(userAccount);
         if (accountList.size() > 0) {
             account = accountList.get(0);
@@ -51,6 +63,32 @@ public class LoginServiceImpl implements LoginService {
                 List<UserInfo> userInfoList = loginDao.selectMyUserInfo(aid);
                 if (userInfoList.size() > 0) {
                     userInfo = userInfoList.get(0);
+                    address = userInfo.getUaddress();
+                    if (address != null) {
+                        areas = address.split("-");
+                        List<Province> provinceList = areaDao.selectOneProvinceByProvince(areas[0]);
+                        List<City> cityList = areaDao.selectOneCityByCity(areas[1]);
+                        List<Area> areaList = areaDao.selectOneAreaByArea(areas[2]);
+                        if (provinceList.size() > 0) {
+                            province = provinceList.get(0);
+                            provinceid = province.getProvinceid();
+                            addressMap.put("province", areas[0]);
+                            addressMap.put("provinceid", provinceid);
+                        }
+                        if (cityList.size() > 0) {
+                            city = cityList.get(0);
+                            cityid = city.getCityid();
+                            addressMap.put("city", areas[1]);
+                            addressMap.put("cityid", cityid);
+                        }
+                        if (areaList.size() > 0) {
+                            area = areaList.get(0);
+                            areaid = area.getAreaid();
+                            addressMap.put("area", areas[2]);
+                            addressMap.put("areaid", areaid);
+                        }
+                        req.getSession().setAttribute(Sys.USER_ADDRESS, addressMap);
+                    }
                     req.getSession().setAttribute(Sys.USER_INFO, userInfo);
                 }
                 resp.getWriter().write("超级管理员登陆成功");
@@ -61,6 +99,32 @@ public class LoginServiceImpl implements LoginService {
                 List<UserInfo> userInfoList = loginDao.selectMyUserInfo(aid);
                 if (userInfoList.size() > 0) {
                     userInfo = userInfoList.get(0);
+                    address = userInfo.getUaddress();
+                    if (address != null) {
+                        areas = address.split("-");
+                        List<Province> provinceList = areaDao.selectOneProvinceByProvince(areas[0]);
+                        List<City> cityList = areaDao.selectOneCityByCity(areas[1]);
+                        List<Area> areaList = areaDao.selectOneAreaByArea(areas[2]);
+                        if (provinceList.size() > 0) {
+                            province = provinceList.get(0);
+                            provinceid = province.getProvinceid();
+                            addressMap.put("province", areas[0]);
+                            addressMap.put("provinceid", provinceid);
+                        }
+                        if (cityList.size() > 0) {
+                            city = cityList.get(0);
+                            cityid = city.getCityid();
+                            addressMap.put("city", areas[1]);
+                            addressMap.put("cityid", cityid);
+                        }
+                        if (areaList.size() > 0) {
+                            area = areaList.get(0);
+                            areaid = area.getAreaid();
+                            addressMap.put("area", areas[2]);
+                            addressMap.put("areaid", areaid);
+                        }
+                        req.getSession().setAttribute(Sys.USER_ADDRESS, addressMap);
+                    }
                     req.getSession().setAttribute(Sys.USER_INFO, userInfo);
                 }
                 resp.getWriter().write("员工登陆成功");
@@ -71,6 +135,32 @@ public class LoginServiceImpl implements LoginService {
                 List<UserInfo> userInfoList = loginDao.selectMyUserInfo(aid);
                 if (userInfoList.size() > 0) {
                     userInfo = userInfoList.get(0);
+                    address = userInfo.getUaddress();
+                    if (address != null) {
+                        areas = address.split("-");
+                        List<Province> provinceList = areaDao.selectOneProvinceByProvince(areas[0]);
+                        List<City> cityList = areaDao.selectOneCityByCity(areas[1]);
+                        List<Area> areaList = areaDao.selectOneAreaByArea(areas[2]);
+                        if (provinceList.size() > 0) {
+                            province = provinceList.get(0);
+                            provinceid = province.getProvinceid();
+                            addressMap.put("province", areas[0]);
+                            addressMap.put("provinceid", provinceid);
+                        }
+                        if (cityList.size() > 0) {
+                            city = cityList.get(0);
+                            cityid = city.getCityid();
+                            addressMap.put("city", areas[1]);
+                            addressMap.put("cityid", cityid);
+                        }
+                        if (areaList.size() > 0) {
+                            area = areaList.get(0);
+                            areaid = area.getAreaid();
+                            addressMap.put("area", areas[2]);
+                            addressMap.put("areaid", areaid);
+                        }
+                        req.getSession().setAttribute(Sys.USER_ADDRESS, addressMap);
+                    }
                     req.getSession().setAttribute(Sys.USER_INFO, userInfo);
                 }
                 resp.getWriter().write("登陆成功");
@@ -132,104 +222,6 @@ public class LoginServiceImpl implements LoginService {
             msg = "注册失败";
             resp.getWriter().write(msg);
         }
-    }
-
-    @Override
-    public void toMyInfo(HttpServletRequest req, HttpServletResponse resp) {
-        Account account = (Account) req.getSession().getAttribute(Sys.LOGIN_USER);
-        Integer aid = account.getAid();
-        UserInfo userInfo = null;
-        List<UserInfo> userInfoList = loginDao.selectMyUserInfo(aid);
-        if (userInfoList.size() > 0) {
-            userInfo = userInfoList.get(0);
-            req.getSession().setAttribute(Sys.USER_INFO, userInfo);
-        }
-
-    }
-
-    @Override
-    public void updateMyInfo(HttpServletRequest req, HttpServletResponse resp) {
-        String uid = req.getParameter("uid");
-        String uname = req.getParameter("uname");
-        String usex = req.getParameter("usex");
-        String uage = req.getParameter("uage");
-        String uaddress = req.getParameter("uaddress");
-        int result = loginDao.updateMyInfo(uid, uname, usex, uage, uaddress);
-        String msg = null;
-        if (result > 0) {
-            msg = "修改成功";
-            req.getSession().setAttribute("msg", msg);
-        } else {
-            msg = "修改失败";
-            req.getSession().setAttribute("msg", msg);
-        }
-    }
-
-    @Override
-    public void addFamilyInfo(HttpServletRequest req, HttpServletResponse resp) {
-        Account account = (Account) req.getSession().getAttribute(Sys.LOGIN_USER);
-        Integer aid = account.getAid();
-        Integer uid = null;
-        List<UserInfo> userInfoList = loginDao.selectMyUserInfo(aid);
-        if (userInfoList.size() > 0) {
-            uid = userInfoList.get(0).getUid();
-        }
-        String lname = req.getParameter("lname");
-        String lage = req.getParameter("lage");
-        String lsex = req.getParameter("lsex");
-        int result = loginDao.addFamilyInfo(lname, lage, lsex, uid);
-        String msg = null;
-        if (result > 0) {
-            msg = "家属添加成功";
-            req.getSession().setAttribute("msg", msg);
-        } else {
-            msg = "家属添加失败";
-            req.getSession().setAttribute("msg", msg);
-        }
-    }
-
-    @Override
-    public void myFamilyInfo(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        Account account = (Account) req.getSession().getAttribute(Sys.LOGIN_USER);
-        Integer aid = account.getAid();
-        Integer uid = null;
-        List<UserInfo> userInfoList = loginDao.selectMyUserInfo(aid);
-        if (userInfoList.size() > 0) {
-            uid = userInfoList.get(0).getUid();
-        }
-        String str_page = req.getParameter("page");
-        String str_limit = req.getParameter("limit");
-        String lname = req.getParameter("lname");
-        System.out.println("lname:" + lname);
-        int page = Integer.parseInt(str_page);
-        int limit = Integer.parseInt(str_limit);
-        int start = (page - 1) * limit;
-        int count = 0;
-        List<LiveInfo> liveInfoList = null;
-        if (lname == null) {
-            liveInfoList = loginDao.selectMyFamilyInfo(uid, start, limit);
-            count = loginDao.selectCountFamily(uid);
-        } else {
-            liveInfoList = loginDao.selectOneMyFamilyInfo(lname, uid, start, limit);
-            count = loginDao.selectCountFamily(lname, uid);
-        }
-        LayListData layListData = new LayListData(count, liveInfoList);
-        String json = JSON.toJSONString(layListData);
-        resp.getWriter().write(json);
-    }
-
-    @Override
-    public void myFamilyName(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        Account account = (Account) req.getSession().getAttribute(Sys.LOGIN_USER);
-        Integer aid = account.getAid();
-        Integer uid = null;
-        List<UserInfo> userInfoList = loginDao.selectMyUserInfo(aid);
-        if (userInfoList.size() > 0) {
-            uid = userInfoList.get(0).getUid();
-        }
-        List<LiveInfo> liveInfoList = loginDao.selectOneMyFamilyInfo(uid);
-        String json = JSON.toJSONString(liveInfoList);
-        resp.getWriter().write(json);
     }
 
     @Override

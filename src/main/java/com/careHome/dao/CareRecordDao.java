@@ -11,19 +11,13 @@ public interface CareRecordDao {
 
     public int selectCountCareRecord(Integer uid);
 
-    public List<CareRecode> selectOneCareRecord(Integer lid, Integer uid, int start, int limit);
+    public List<CareRecode> selectOneCareRecord(String lname, Integer uid, int start, int limit);
 
     public int selectCountCareRecord(Integer lid, Integer uid);
 
     public int deletedOneCareRecord(String careid);
 
-    public List<CareRecode> selectOneCareRecordByCareid(String careid);
+    public int updateCareRecord(String careid, String careinfo);
 
-    public List<LiveInfo> selectOneLiveLidByLname(String lname);
-
-    public List<UserInfo> selectOneUserUidByUname(String uname);
-
-    public int updateCareRecord(String careid, Integer lid, Integer uid, String careinfo);
-
-    public int addCareRecord(Integer lid, Integer uid, String careinfo);
+    public int addCareRecord(String lid, Integer uid, String careinfo);
 }

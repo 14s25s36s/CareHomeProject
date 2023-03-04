@@ -1,12 +1,14 @@
 package com.careHome.pojo;
 
+import java.util.Date;
+
 public class LiveInfo {
     private Integer lid;
     private String lname;
-    private Integer lage;
+    private Date lage;
     private String lsex;
     private Integer uid;
-    private Integer lstate;
+    private String lstate;
     private String uname;
     private Integer careuid;
     private String careuname;
@@ -20,10 +22,10 @@ public class LiveInfo {
                 ", lage=" + lage +
                 ", lsex='" + lsex + '\'' +
                 ", uid=" + uid +
-                ", lstate=" + lstate +
+                ", lstate='" + lstate + '\'' +
                 ", uname='" + uname + '\'' +
                 ", careuid=" + careuid +
-                ", careuname=" + careuname +
+                ", careuname='" + careuname + '\'' +
                 ", deleted=" + deleted +
                 '}';
     }
@@ -44,11 +46,11 @@ public class LiveInfo {
         this.lname = lname;
     }
 
-    public Integer getLage() {
+    public Date getLage() {
         return lage;
     }
 
-    public void setLage(Integer lage) {
+    public void setLage(Date lage) {
         this.lage = lage;
     }
 
@@ -68,11 +70,11 @@ public class LiveInfo {
         this.uid = uid;
     }
 
-    public Integer getLstate() {
+    public String getLstate() {
         return lstate;
     }
 
-    public void setLstate(Integer lstate) {
+    public void setLstate(String lstate) {
         this.lstate = lstate;
     }
 
@@ -108,7 +110,7 @@ public class LiveInfo {
         this.deleted = deleted;
     }
 
-    public LiveInfo(Integer lid, String lname, Integer lage, String lsex, Integer uid, Integer lstate, String uname, Integer careuid, String careuname, Integer deleted) {
+    public LiveInfo(Integer lid, String lname, Date lage, String lsex, Integer uid, String lstate, String uname, Integer careuid, String careuname, Integer deleted) {
         this.lid = lid;
         this.lname = lname;
         this.lage = lage;

@@ -11,16 +11,6 @@ public interface LoginService {
 
     public void register(HttpServletRequest req, HttpServletResponse resp) throws IOException;
 
-    public void toMyInfo(HttpServletRequest req, HttpServletResponse resp);
-
-    public void updateMyInfo(HttpServletRequest req, HttpServletResponse resp);
-
-    public void addFamilyInfo(HttpServletRequest req, HttpServletResponse resp);
-
-    public void myFamilyInfo(HttpServletRequest req, HttpServletResponse resp) throws IOException;
-
-    public void myFamilyName(HttpServletRequest req, HttpServletResponse resp) throws IOException;
-
     public void getVerifyCode(HttpServletRequest req, HttpServletResponse resp);
 
     public void judgeCode(HttpServletRequest req, HttpServletResponse resp) throws IOException;

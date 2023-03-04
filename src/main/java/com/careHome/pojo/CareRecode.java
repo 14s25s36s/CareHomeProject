@@ -11,6 +11,7 @@ public class CareRecode {
     private Date caredate;
     private String careinfo;
     private Integer deleted;
+    private Date lasteditdate;
 
     @Override
     public String toString() {
@@ -23,6 +24,7 @@ public class CareRecode {
                 ", caredate=" + caredate +
                 ", careinfo='" + careinfo + '\'' +
                 ", deleted=" + deleted +
+                ", lasteditdate=" + lasteditdate +
                 '}';
     }
 
@@ -90,10 +92,15 @@ public class CareRecode {
         this.deleted = deleted;
     }
 
-    public CareRecode() {
+    public Date getLasteditdate() {
+        return lasteditdate;
     }
 
-    public CareRecode(Integer careid, Integer uid, String uname, Integer lid, String lname, Date caredate, String careinfo, Integer deleted) {
+    public void setLasteditdate(Date lasteditdate) {
+        this.lasteditdate = lasteditdate;
+    }
+
+    public CareRecode(Integer careid, Integer uid, String uname, Integer lid, String lname, Date caredate, String careinfo, Integer deleted, Date lasteditdate) {
         this.careid = careid;
         this.uid = uid;
         this.uname = uname;
@@ -102,5 +109,9 @@ public class CareRecode {
         this.caredate = caredate;
         this.careinfo = careinfo;
         this.deleted = deleted;
+        this.lasteditdate = lasteditdate;
+    }
+
+    public CareRecode() {
     }
 }

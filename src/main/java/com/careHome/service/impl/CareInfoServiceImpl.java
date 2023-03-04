@@ -3,6 +3,7 @@ package com.careHome.service.impl;
 import com.alibaba.fastjson2.JSON;
 import com.careHome.dao.CareInfoDao;
 import com.careHome.dao.impl.CareInfoDaoImpl;
+import com.careHome.pojo.LiveInfo;
 import com.careHome.pojo.UserInfo;
 import com.careHome.service.CareInfoService;
 import com.careHome.utils.LayListData;
@@ -59,39 +60,13 @@ public class CareInfoServiceImpl implements CareInfoService {
         resp.getWriter().write(result);
     }
 
-    /**
-     * 修改护工信息
-     *
-     * @param req
-     * @param resp
-     * @throws IOException
-     */
     @Override
-    public void updateCareInfo(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String uid = req.getParameter("uid");
-        String uname = req.getParameter("uname");
-        String usex = req.getParameter("usex");
-        String uage = req.getParameter("uage");
-        String uaddress = req.getParameter("uaddress");
-        String ustate = req.getParameter("ustate");
-        int result = careInfoDao.updateCareInfo(uid, uname, usex, uage, uaddress, ustate);
-        resp.getWriter().write(result);
-    }
-
-    /**
-     * 添加护工信息
-     *
-     * @param req
-     * @param resp
-     * @throws IOException
-     */
-    @Override
-    public void addCareInfo(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String uname = req.getParameter("uname");
-        String usex = req.getParameter("usex");
-        String uage = req.getParameter("uage");
-        String uaddress = req.getParameter("uaddress");
-        int result = careInfoDao.addCareInfo(uname, usex, uage, uaddress);
-        resp.getWriter().write(result);
+    public void getLiveByCare(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String careuid = req.getParameter("uid");
+        System.out.println(careuid);
+        List<LiveInfo> liveInfoList = careInfoDao.getLiveInfoByCare(careuid);
+        System.out.println(liveInfoList);
+        String json = JSON.toJSONString(liveInfoList);
+        resp.getWriter().write(json);
     }
 }

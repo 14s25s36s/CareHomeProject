@@ -31,7 +31,18 @@
         <th lay-data="{field:'uid',sort:true}">ID</th>
         <th lay-data="{field:'uname'}">姓名</th>
         <th lay-data="{field:'usex'}">性别</th>
-        <th lay-data="{field:'uage'}">年龄</th>
+        <th lay-data="{field:'uage',templet:function(d){
+            if(d.uage===undefined){
+                return null;
+            }else{var agedatestr = JSON.stringify(d.uage);
+                var nowdate = new Date();
+                var nowyear = nowdate.getFullYear();
+                var ageyear = agedatestr.slice(1,5);
+                var age = Number(nowyear) - Number(ageyear);
+                return age;
+            }
+            }}">年龄
+        </th>
         <th lay-data="{field:'uaddress'}">家庭住址</th>
         <th lay-data="{field:'ustate',templet:'#userstate'}">状态</th>
         <th lay-data="{field:'aid'}">账户id</th>
@@ -72,51 +83,21 @@
 </div>
 <!-- END 添加员工 -->
 
-<!-- START 编辑员工 -->
-<div id="updatecareform" style="display:none;" class="layui-form" lay-filter="updatecareform">
-    <input type="hidden" name="uid">
-    <div class="layui-form-item">
-        <label class="layui-form-label">姓名</label>
-        <div class="layui-input-block">
-            <input type="text" name="uname" autocomplete="off" placeholder="请输入姓名" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item" pane="">
-        <label class="layui-form-label">性别</label>
-        <div class="layui-input-block">
-            <input type="radio" name="usex" value="男" title="男" checked>
-            <input type="radio" name="usex" value="女" title="女">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">年龄</label>
-        <div class="layui-input-block">
-            <input type="text" name="uage" autocomplete="off" placeholder="请输入年龄" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">家庭住址</label>
-        <div class="layui-input-block">
-            <input type="text" name="uaddress" autocomplete="off" placeholder="请输入家庭住址" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item" pane="">
-        <label class="layui-form-label">目前状态</label>
-        <div class="layui-input-block">
-            <input type="radio" name="ustate" value="0" title="在院" checked>
-            <input type="radio" name="ustate" value="1" title="出差">
-        </div>
-    </div>
+<!-- START 负责住户 -->
+<div id="carelive" style="display:none;" class="layui-form" lay-filter="carelive">
+    <table id="opencare" lay-filter="opencare">
+        <h3 style="text-align: center">负责住户名单</h3>
+    </table>
 
 </div>
-<!-- END 编辑员工 -->
+<!-- END 负责住户 -->
 
 <%--START行内按钮--%>
 
 <script type="text/html" id="btntool">
     <div class="layui-btn-container">
         <button class="layui-btn layui-btn-sm layui-bg-red" lay-event="delete">删除</button>
-        <button class="layui-btn layui-btn-sm" lay-event="update">编辑</button>
+        <button class="layui-btn layui-btn-sm" lay-event="select">负责人员</button>
     </div>
 </script>
 <%--END行内按钮--%>
@@ -130,7 +111,6 @@
             </div>
         </div>
         <button class="layui-btn layui-btn-sm layui-btn-warm" lay-event="check">查询</button>
-        <button class="layui-btn layui-btn-sm layui-btn-normal" lay-event="add" style="margin: 0px 100px">新增用户信息
         </button>
     </div>
 </script>
@@ -155,6 +135,7 @@
     {{# } }}
 </script>
 <script type="text/javascript" src="static/lib/layui/layui.all.js" charset="UTF-8"></script>
+<script type="text/javascript" src="static/js/addressandage.js"></script>
 <script type="text/javascript" src="static/js/operatecare.js"></script>
 </table>
 </body>

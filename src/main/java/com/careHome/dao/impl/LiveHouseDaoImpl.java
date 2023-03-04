@@ -1,7 +1,9 @@
 package com.careHome.dao.impl;
 
 import com.careHome.dao.LiveHouseDao;
+import com.careHome.pojo.Care;
 import com.careHome.pojo.LiveInfo;
+import com.careHome.pojo.Lstate;
 import com.careHome.utils.JDBCUtils;
 
 import java.util.List;
@@ -17,10 +19,10 @@ public class LiveHouseDaoImpl implements LiveHouseDao {
     @Override
     public List<LiveInfo> selectAllLiveInfo(int page, int limit) {
         String sql = "SELECT live.lid AS lid,live.lname AS lname,live.lage AS lage,live.lsex AS lsex" +
-                ",live.uid AS uid,state.lstate AS lstate,live.deleted AS deleted,user.uname AS uname" +
+                ",live.uid AS uid,state.lstatename AS lstate,live.deleted AS deleted,user.uname AS uname" +
                 ",live.careuid AS careuid,care.careuname AS careuname" +
                 " FROM liveinfo AS live JOIN userinfo AS user ON live.uid=user.uid" +
-                " JOIN livestate AS state ON live.lid=state.lid" +
+                " JOIN lstatename AS state ON live.lstate=state.lstate" +
                 " JOIN careuser AS care ON live.careuid=care.careuid" +
                 " WHERE live.deleted=0 AND user.deleted=0 LIMIT ?,? ";
 
@@ -66,10 +68,10 @@ public class LiveHouseDaoImpl implements LiveHouseDao {
     public List<LiveInfo> selectOneLiveHouseInfo(String checktext, int page, int limit) {
         checktext = "%" + checktext + "%";
         String sqls = "SELECT live.lid AS lid,live.lname AS lname,live.lage AS lage,live.lsex AS lsex" +
-                ",live.uid AS uid,state.lstate AS lstate,live.deleted AS deleted,user.uname AS uname" +
+                ",live.uid AS uid,state.lstatename AS lstate,live.deleted AS deleted,user.uname AS uname" +
                 ",live.careuid AS careuid,care.careuname AS careuname" +
                 " FROM liveinfo AS live JOIN userinfo AS user ON live.uid=user.uid" +
-                " JOIN livestate AS state ON live.lid=state.lid" +
+                " JOIN lstatename AS state ON live.lstate=state.lstate" +
                 " JOIN careuser AS care ON live.careuid=care.careuid" +
                 " WHERE live.lname LIKE ? AND live.deleted=0 LIMIT ?,?";
         List<LiveInfo> liveInfoList = JDBCUtils.selectData(sqls, LiveInfo.class, checktext, page, limit);
@@ -85,10 +87,10 @@ public class LiveHouseDaoImpl implements LiveHouseDao {
     @Override
     public List<LiveInfo> selectOneLiveInfo(String lid) {
         String sql = "SELECT live.lid AS lid,live.lname AS lname,live.lage AS lage,live.lsex AS lsex" +
-                ",live.uid AS uid,state.lstate AS lstate,live.deleted AS deleted,user.uname AS uname" +
+                ",live.uid AS uid,state.lstatename AS lstate,live.deleted AS deleted,user.uname AS uname" +
                 ",live.careuid AS careuid,care.careuname AS careuname" +
                 " FROM liveinfo AS live JOIN userinfo AS user ON live.uid=user.uid" +
-                " JOIN livestate AS state ON live.lid=state.lid" +
+                " JOIN lstatename AS state ON live.lstate=state.lstate" +
                 " JOIN careuser AS care ON live.careuid=care.careuid" +
                 " WHERE live.lid=? AND live.deleted=0";
         List<LiveInfo> liveInfoList = JDBCUtils.selectData(sql, LiveInfo.class, lid);
@@ -114,14 +116,13 @@ public class LiveHouseDaoImpl implements LiveHouseDao {
      * @param lname
      * @param lage
      * @param lsex
-     * @param lstate
      * @param lid
      * @return
      */
     @Override
-    public int updateLiveInfo(String lname, String lage, String lsex, String lid) {
-        String sql = "UPDATE liveinfo SET lname=?,lage=?,lsex=? WHERE lid=?";
-        int result = JDBCUtils.updateData(sql, lname, lage, lsex, lid);
+    public int updateLiveInfo(String lname, String lage, String lsex, String careuid, String lstate, String lid) {
+        String sql = "UPDATE liveinfo SET lname=?,lage=?,lsex=?,careuid=?,lstate=? WHERE lid=?";
+        int result = JDBCUtils.updateData(sql, lname, lage, lsex, careuid, lstate, lid);
         return result;
     }
 
@@ -135,11 +136,23 @@ public class LiveHouseDaoImpl implements LiveHouseDao {
      * @return
      */
     @Override
-    public int addUserInfo(String lname, String lage, String lsex, String uid) {
-        String sql = "INSERT INTO liveinfo (lname,lage,lsex,uid) VALUES (?,?,?,?)";
-        int result = JDBCUtils.insertData(sql, lname, lage, lsex, uid);
+    public int addUserInfo(String lname, String lage, String lsex, String uid, String careuid, String lstate) {
+        String sql = "INSERT INTO liveinfo (lname,lage,lsex,uid,careuid,lstate) VALUES (?,?,?,?,?,?)";
+        int result = JDBCUtils.insertData(sql, lname, lage, lsex, uid, careuid, lstate);
         return result;
     }
 
+    @Override
+    public List<Care> getCareList() {
+        String sql = "SELECT id,careuid,careuname,deleted FROM careuser";
+        List<Care> careList = JDBCUtils.selectData(sql, Care.class);
+        return careList;
+    }
 
+    @Override
+    public List<Lstate> getStateList() {
+        String sql = "SELECT id,lstate,lstatename,deleted FROM lstatename";
+        List<Lstate> lstateList = JDBCUtils.selectData(sql, Lstate.class);
+        return lstateList;
+    }
 }

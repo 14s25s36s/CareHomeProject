@@ -65,27 +65,6 @@ public class LoginServlet extends SuperServlet {
         } else if ("judgecode".equals(action)) {
             loginService.judgeCode(req, resp);
         }
-//        else if ("tomyinfo".equals(action)) {
-//            loginService.toMyInfo(req, resp);
-//            req.getRequestDispatcher("../WEB-INF/pages/myinfo.jsp").forward(req, resp);
-//        } else if ("toupdatemyinfo".equals(action)) {
-//            loginService.toMyInfo(req, resp);
-//            req.getRequestDispatcher("../WEB-INF/pages/updatemyinfo.jsp").forward(req, resp);
-//        } else if ("updatemyinfo".equals(action)) {
-//            loginService.updateMyInfo(req, resp);
-//            resp.sendRedirect(req.getContextPath() + "/mysuccess.jsp");
-//        } else if ("toaddfamily".equals(action)) {
-//            req.getRequestDispatcher("../WEB-INF/pages/addfamilyinfo.jsp").forward(req, resp);
-//        } else if ("addfamilyinfo".equals(action)) {
-//            loginService.addFamilyInfo(req, resp);
-//            resp.sendRedirect(req.getContextPath() + "/myfamilysuccess.jsp");
-//        } else if ("tomyfamilyinfo".equals(action)) {
-//            req.getRequestDispatcher("../WEB-INF/pages/myfamilyinfo.jsp").forward(req, resp);
-//        } else if ("myfamilyinfo".equals(action)) {
-//            loginService.myFamilyInfo(req, resp);
-//        } else if ("myfamilyname".equals(action)) {
-//            loginService.myFamilyName(req, resp);
-//        }
     }
 
     @Override
