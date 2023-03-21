@@ -67,6 +67,7 @@
                         <dd><a href="javascript:;" _url="user/touserinfo">用户管理</a></dd>
                         <dd><a href="javascript:;" _url="live/livehouse">入住人员清单</a></dd>
                         <dd><a href="javascript:;" _url="care/tocareinfo">工作人员信息</a></dd>
+                        <dd><a href="javascript:;" _url="state/tostateinfo">老人状态信息</a></dd>
                     </dl>
                 </li>
             </ul>
